@@ -39,7 +39,7 @@ A high-performance, responsive portfolio web application crafted with **React, V
 
 7. **Direct Contact Hub:**
    * Interactive direct message form.
-   * 1-click clipboard copy for Email (`poojakale.in@gmail.com`) and Phone (`+91 76207 40833`).
+   * 1-click clipboard copy for Email (`poojakale.in@gmail.com`) and Phone (`+91`).
    * Direct LinkedIn profile link.
 
 ---

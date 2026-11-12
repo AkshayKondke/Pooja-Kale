@@ -7,7 +7,7 @@ export const personalInfo = {
   experienceYears: "1.5+",
   noticePeriod: "1 Month (Fast-Track Joiner)",
   email: "poojakale.in@gmail.com",
-  phone: "+91 76207 40833",
+  phone: "+91 ",
   linkedin: "https://www.linkedin.com/in/pooja-kale-90503b224/",
   github: "https://github.com/poojakale",
   status: "Actively seeking Data Analyst & Business Analyst opportunities",
