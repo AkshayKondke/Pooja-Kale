@@ -1,0 +1,45 @@
+name: CI Quality Gate
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  validate-and-build:
+    name: Build & Verify Production Bundle
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: 🏗️ Build production bundle
+        run: npm run build
+
+      - name: 🔍 Verify essential build artifacts
+        run: |
+          echo "Verifying build outputs in dist/..."
+          test -f dist/index.html || { echo "❌ dist/index.html missing!"; exit 1; }
+          test -f dist/resume.pdf || { echo "❌ dist/resume.pdf missing!"; exit 1; }
+          echo "✅ All required static assets verified successfully."
+          echo ""
+          echo "📊 Production Bundle Summary:"
+          ls -lh dist/
+          ls -lh dist/assets/
