@@ -55,7 +55,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="pt-10 sm:pt-12 pb-16 sm:pb-20 scroll-mt-24 sm:scroll-mt-28 relative overflow-hidden">
+    <section id="about" className="pt-8 sm:pt-10 pb-16 sm:pb-20 scroll-mt-24 sm:scroll-mt-28 relative overflow-hidden">
       {/* Subtle Apple-style Background Ambient Light */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-gradient-to-tr from-sky-500/5 via-indigo-500/5 to-purple-500/5 blur-[140px] pointer-events-none -z-10" />
 
