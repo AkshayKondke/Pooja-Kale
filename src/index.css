@@ -22,6 +22,9 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -31,7 +34,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    width: 100%;
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  button, a, input, select, textarea {
+    touch-action: manipulation;
   }
 }
 

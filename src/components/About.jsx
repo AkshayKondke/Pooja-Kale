@@ -4,9 +4,7 @@ import {
   UserCheck,
   Sparkles,
   Target,
-  Zap,
   ShieldCheck,
-  CheckCircle2,
   GraduationCap,
   Building2,
   Compass,
@@ -15,31 +13,36 @@ import {
   TrendingUp,
   Activity,
   Palette,
-  Workflow,
   ArrowRight,
   Clock,
-  MapPin,
   Briefcase,
   Layers,
   Quote,
   ChevronRight,
-  ArrowUpRight,
+  ChevronDown,
+  ChevronUp,
   Check
 } from 'lucide-react';
 import { personalInfo, aboutMeData } from '../data/portfolioData';
 
 export default function About() {
   const [activeTab, setActiveTab] = useState('all');
+  const [expandedMilestones, setExpandedMilestones] = useState({ 0: false, 1: false, 2: false });
+
+  const toggleMilestone = (index) => {
+    setExpandedMilestones((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
 
   const tabs = [
-    { id: 'all', label: 'All (Bento)', icon: Layers },
-    { id: 'journey', label: 'My Journey', icon: Compass },
+    { id: 'all', label: 'Overview', icon: Layers },
     { id: 'approach', label: 'Problem-Solving', icon: Search },
-    { id: 'interests', label: 'Interests & Craft', icon: Sparkles },
-    { id: 'goals', label: 'Goals & Value', icon: Target },
+    { id: 'journey', label: 'My Journey', icon: Compass },
+    { id: 'interests', label: 'Interests & Goals', icon: Sparkles },
   ];
 
-  // Map icon strings from data to actual Lucide components
   const iconMap = {
     Search: Search,
     ShieldCheck: ShieldCheck,
@@ -48,62 +51,78 @@ export default function About() {
     Sparkles: Sparkles,
     Activity: Activity,
     Palette: Palette,
-    Workflow: Workflow,
-    Building2: Building2,
-    GraduationCap: GraduationCap,
-    Compass: Compass,
+  };
+
+  const handleTabKeyDown = (e, currentIndex) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % tabs.length;
+      setActiveTab(tabs[nextIndex].id);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const prevIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      setActiveTab(tabs[prevIndex].id);
+    }
   };
 
   return (
-    <section id="about" className="pt-8 sm:pt-10 pb-16 sm:pb-20 scroll-mt-24 sm:scroll-mt-28 relative overflow-hidden">
-      {/* Subtle Apple-style Background Ambient Light */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-gradient-to-tr from-sky-500/5 via-indigo-500/5 to-purple-500/5 blur-[140px] pointer-events-none -z-10" />
+    <section id="about" className="py-16 sm:py-20 md:py-24 scroll-mt-24 sm:scroll-mt-28 relative overflow-hidden">
+      {/* Subtle Apple-style Ambient Background Light */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-gradient-to-tr from-sky-500/10 via-indigo-500/5 to-transparent blur-[140px] pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-semibold text-sky-600 dark:text-sky-400 shadow-sm">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 space-y-3.5">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-semibold text-sky-600 dark:text-sky-400 shadow-xs">
             <UserCheck className="w-3.5 h-3.5" />
             <span>Profile & Mindset</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 dark:text-white leading-[1.15]">
-            Where Engineering Systems <br className="hidden sm:inline" />
-            Meet <span className="text-gradient-blue">Business Intelligence</span>.
+          <h2 className="text-3xl sm:text-4xl md:text-[44px] lg:text-[46px] font-extrabold tracking-[-0.03em] text-zinc-950 dark:text-white leading-[1.12]">
+            Engineering Systems <br className="hidden sm:inline" />
+            Meets <span className="text-gradient-blue">Business Intelligence</span>.
           </h2>
 
-          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto">
-            From database architectures to enterprise ERP reconciliations at OIA Global—turning complex, fragmented data into bulletproof systems and executive clarity.
+          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto">
+            From relational database foundations to enterprise ERP reconciliations at OIA Global—turning messy data into reliable systems and executive clarity.
           </p>
 
           {/* Apple-style Segmented Control / Tabs */}
-          <div className="pt-4 flex justify-center">
-            <div className="inline-flex p-1.5 rounded-2xl glass-panel bg-black/[0.03] dark:bg-white/[0.04] border border-black/5 dark:border-white/10 max-w-full overflow-x-auto no-scrollbar gap-1 shadow-sm">
-              {tabs.map((tab) => {
+          <div className="pt-2 flex justify-center">
+            <div
+              role="tablist"
+              aria-label="About section categories"
+              className="inline-flex p-1.5 rounded-2xl glass-panel bg-black/[0.03] dark:bg-white/[0.04] border border-black/5 dark:border-white/10 max-w-full overflow-x-auto no-scrollbar gap-1 shadow-xs"
+            >
+              {tabs.map((tab, idx) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
+                    id={`about-tab-${tab.id}`}
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={`about-panel-${tab.id}`}
+                    tabIndex={isActive ? 0 : -1}
+                    onKeyDown={(e) => handleTabKeyDown(e, idx)}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors duration-200 whitespace-nowrap cursor-pointer ${
+                    className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors duration-200 whitespace-nowrap cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${
                       isActive
-                        ? 'text-zinc-950 dark:text-white'
-                        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                        ? 'text-zinc-950 dark:text-white font-bold'
+                        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
                     }`}
                   >
                     {isActive && (
                       <motion.div
                         layoutId="activeAboutTab"
-                        className="absolute inset-0 bg-white dark:bg-[#1c1c22] rounded-xl shadow-sm border border-black/5 dark:border-white/10"
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                        className="absolute inset-0 bg-white dark:bg-[#1c1c22] rounded-xl shadow-xs border border-black/5 dark:border-white/10 -z-10"
+                        transition={{ type: 'spring', stiffness: 420, damping: 32 }}
                       />
                     )}
-                    <span className="relative z-10 flex items-center gap-1.5">
-                      <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-sky-500' : 'text-zinc-400 dark:text-zinc-500'}`} />
-                      {tab.label}
-                    </span>
+                    <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-sky-500' : 'text-zinc-400 dark:text-zinc-500'}`} />
+                    <span>{tab.label}</span>
                   </button>
                 );
               })}
@@ -114,57 +133,54 @@ export default function About() {
         {/* Tab Content Panes */}
         <AnimatePresence mode="wait">
           
-          {/* TAB 1: ALL (APPLE BENTO OVERVIEW) */}
+          {/* TAB 1: OVERVIEW (BENTO PROFILE) */}
           {activeTab === 'all' && (
             <motion.div
               key="all"
-              initial={{ opacity: 0, y: 16 }}
+              id="about-panel-all"
+              role="tabpanel"
+              aria-labelledby="about-tab-all"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-6"
             >
-              {/* Row 1: Main Narrative (2/3) + Executive Factsheet (1/3) */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Row 1: Narrative (8 cols) + Factsheet (4 cols) */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
                 
                 {/* Main Narrative Bento Card */}
-                <div className="lg:col-span-8 glass-panel rounded-3xl p-6 sm:p-9 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-6 shadow-sm relative overflow-hidden">
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400">
-                      <Sparkles className="w-4 h-4 text-sky-500" />
-                      <span>Origin & Core Philosophy</span>
+                <div className="lg:col-span-8 glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-5 shadow-xs flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-semibold">
+                      <Sparkles className="w-3.5 h-3.5 text-sky-500" />
+                      <span>Origin & Philosophy</span>
                     </div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
+
+                    <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white tracking-tight">
                       {aboutMeData.headline}
                     </h3>
-                  </div>
 
-                  <div className="space-y-4 text-zinc-600 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
-                    <p>
-                      {aboutMeData.narrativeLead}
-                    </p>
-                    <p>
-                      {aboutMeData.narrativeBody}
-                    </p>
-                    <p className="text-zinc-500 dark:text-zinc-400 text-xs sm:text-sm">
-                      {aboutMeData.narrativeAi}
-                    </p>
+                    <div className="space-y-3 text-zinc-600 dark:text-zinc-300 text-sm sm:text-[15px] leading-relaxed">
+                      <p>{aboutMeData.narrativeLead}</p>
+                      <p>{aboutMeData.narrativeBody}</p>
+                    </div>
                   </div>
 
                   {/* Philosophy Quote Callout */}
-                  <div className="rounded-2xl p-4 sm:p-5 bg-gradient-to-r from-sky-500/5 via-indigo-500/5 to-transparent border-l-4 border-sky-500 border-zinc-200/50 dark:border-white/5 space-y-2">
-                    <div className="flex items-center gap-2 text-sky-600 dark:text-sky-400 text-xs font-semibold uppercase tracking-wider">
-                      <Quote className="w-4 h-4" />
+                  <div className="rounded-2xl p-4 sm:p-4.5 bg-sky-500/[0.04] border-l-3 border-sky-500 border-zinc-200/50 dark:border-white/5 space-y-1">
+                    <div className="flex items-center gap-1.5 text-sky-600 dark:text-sky-400 text-[11px] font-semibold uppercase tracking-wider font-mono">
+                      <Quote className="w-3 h-3" />
                       <span>Guiding Principle</span>
                     </div>
-                    <blockquote className="text-sm sm:text-base italic font-medium text-zinc-800 dark:text-zinc-200">
+                    <blockquote className="text-xs sm:text-sm italic font-medium text-zinc-800 dark:text-zinc-200">
                       {aboutMeData.philosophyQuote}
                     </blockquote>
                   </div>
 
-                  {/* Core Focus Pills */}
-                  <div className="pt-2 flex flex-wrap gap-2">
-                    {["B.E. IT 2024", "Workday ERP Reconciliation", "Star Schema BI", "Advanced DAX", "Python / SQL", "Applied AI"].map((chip) => (
+                  {/* Core Capabilities Badges */}
+                  <div className="pt-2 flex flex-wrap gap-2 border-t border-zinc-100 dark:border-white/5">
+                    {["B.E. IT 2024 (7.74 Distinction)", "Workday ERP Reconciliation", "Star Schema BI Modeling", "Python / SQL Automation"].map((chip) => (
                       <span
                         key={chip}
                         className="px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5"
@@ -175,136 +191,142 @@ export default function About() {
                   </div>
                 </div>
 
-                {/* Executive Factsheet Bento Card */}
-                <div className="lg:col-span-4 glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 flex flex-col justify-between shadow-sm space-y-6">
+                {/* Executive Factsheet Card */}
+                <div className="lg:col-span-4 glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 flex flex-col justify-between shadow-xs space-y-5">
                   
-                  {/* Notice Period Badge */}
-                  <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 space-y-1.5">
+                  {/* Hiring Availability Status */}
+                  <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-                        Hiring Status
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
+                        Availability
                       </span>
                     </div>
-                    <div className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
+                    <div className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
                       1 Month Notice Period
                     </div>
                     <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                      Currently serving notice at OIA Global. Ready for fast-track onboarding.
+                      Serving notice at OIA Global. Fast-track onboarding available.
                     </p>
                   </div>
 
                   {/* Quick Facts List */}
-                  <div className="space-y-4">
-                    <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                      Key Highlights
+                  <div className="space-y-3">
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                      Key Facts
                     </div>
                     {aboutMeData.quickFacts.map((fact, i) => (
-                      <div key={i} className="pb-3 border-b border-zinc-100 dark:border-white/5 last:border-0 last:pb-0">
-                        <div className="text-xs text-zinc-500 dark:text-zinc-400">{fact.label}</div>
+                      <div key={i} className="pb-2.5 border-b border-zinc-100 dark:border-white/5 last:border-0 last:pb-0">
+                        <div className="text-[11px] text-zinc-400">{fact.label}</div>
                         <div className="text-sm font-semibold text-zinc-900 dark:text-white">{fact.value}</div>
                         <div className="text-[11px] text-zinc-500 dark:text-zinc-400">{fact.sub}</div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Quick Action Button */}
+                  {/* Connect CTA Button */}
                   <a
                     href="#contact"
-                    className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-sky-600 dark:hover:bg-sky-400 dark:hover:text-zinc-950 transition-all duration-200 shadow-sm"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-sky-600 dark:hover:bg-sky-400 dark:hover:text-zinc-950 transition-colors shadow-xs"
                   >
-                    <span>Connect Regarding Opportunities</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>Connect Regarding Roles</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </a>
 
                 </div>
               </div>
 
-              {/* Row 2: 4-Step Problem Solving (7 cols) + Trajectory Milestones (5 cols) */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Row 2: 4-Step Framework Preview (7 cols) + Journey Rail (5 cols) */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
                 
-                {/* 4-Step Problem Solving Approach Card */}
-                <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-6 shadow-sm">
+                {/* 4-Step Problem Solving Framework */}
+                <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-5 shadow-xs flex flex-col justify-between">
                   <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <div className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 flex items-center gap-1.5">
+                    <div>
+                      <div className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 flex items-center gap-1.5 font-semibold">
                         <Search className="w-3.5 h-3.5" />
-                        <span>Methodology</span>
+                        <span>Execution Model</span>
                       </div>
-                      <h4 className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
-                        How I Approach Problems
+                      <h4 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-white tracking-tight mt-0.5">
+                        Problem-Solving Framework
                       </h4>
                     </div>
                     <button
                       onClick={() => setActiveTab('approach')}
                       className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Deep Dive</span>
+                      <span>Explore</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {/* 4 Step Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {aboutMeData.approach.map((step) => {
                       const StepIcon = iconMap[step.icon] || Search;
                       return (
                         <div
                           key={step.step}
-                          className="p-4 rounded-2xl bg-zinc-50/70 dark:bg-white/[0.03] border border-zinc-200/60 dark:border-white/5 space-y-2 hover:border-sky-500/30 transition-colors"
+                          className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200/70 dark:border-white/5 space-y-1.5"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="font-mono text-xs font-bold text-sky-600 dark:text-sky-400 px-2 py-0.5 rounded-md bg-sky-500/10">
-                              {step.step}
+                            <span className="font-mono text-xs font-bold text-sky-600 dark:text-sky-400 px-2.5 py-0.5 rounded-md bg-sky-500/10">
+                              STEP {step.step}
                             </span>
                             <StepIcon className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
                           </div>
                           <div className="font-bold text-sm text-zinc-900 dark:text-white">
                             {step.title}
                           </div>
-                          <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
+                          <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                             {step.description}
                           </p>
                         </div>
                       );
                     })}
                   </div>
+
+                  <div className="pt-2 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between text-xs text-zinc-500 font-mono">
+                    <span>Deterministic Methodology</span>
+                    <span className="text-sky-600 dark:text-sky-400 font-semibold">Zero-Discrepancy Target</span>
+                  </div>
                 </div>
 
-                {/* Journey Snapshot Card */}
-                <div className="lg:col-span-5 glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-6 shadow-sm flex flex-col justify-between">
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between">
-                      <div className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
+                {/* Journey Snapshot */}
+                <div className="lg:col-span-5 glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-5 shadow-xs flex flex-col justify-between">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5 font-semibold">
                         <Compass className="w-3.5 h-3.5" />
                         <span>Trajectory</span>
                       </div>
-                      <button
-                        onClick={() => setActiveTab('journey')}
-                        className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
-                      >
-                        <span>Full Timeline</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
+                      <h4 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-white tracking-tight mt-0.5">
+                        My Journey
+                      </h4>
                     </div>
-                    <h4 className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
-                      My Journey at a Glance
-                    </h4>
+                    <button
+                      onClick={() => setActiveTab('journey')}
+                      className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>Timeline</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
 
-                  {/* Compact Timeline Rail */}
-                  <div className="space-y-4 relative before:absolute before:left-3.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-zinc-200 dark:before:bg-zinc-800">
+                  {/* 3 Compact Milestone Rows */}
+                  <div className="space-y-3.5 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-zinc-200 dark:before:bg-zinc-800">
                     {aboutMeData.journey.map((item, idx) => (
-                      <div key={idx} className="relative pl-8 space-y-1">
-                        <div className="absolute left-2 top-1.5 w-3 h-3 rounded-full bg-white dark:bg-[#121217] border-2 border-sky-500 shadow-sm" />
+                      <div key={idx} className="relative pl-7 space-y-0.5">
+                        <div className="absolute left-1.5 top-1.5 w-3 h-3 rounded-full bg-white dark:bg-[#121217] border-2 border-sky-500 shadow-xs" />
                         <div className="flex items-center gap-2">
-                          <span className="text-[11px] font-mono font-bold text-sky-600 dark:text-sky-400">
+                          <span className="text-xs font-mono font-bold text-sky-600 dark:text-sky-400">
                             {item.period}
                           </span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 font-medium">
+                          <span className="text-xs px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 font-medium">
                             {item.badge}
                           </span>
                         </div>
-                        <div className="text-sm font-bold text-zinc-900 dark:text-white leading-snug">
+                        <div className="text-sm font-bold text-zinc-900 dark:text-white">
                           {item.title}
                         </div>
                         <div className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -315,79 +337,66 @@ export default function About() {
                   </div>
 
                   <div className="pt-2 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between text-xs text-zinc-500">
-                    <span>1.5+ Years Enterprise Experience</span>
+                    <span>1.5+ Yrs Enterprise Experience</span>
                     <span className="font-semibold text-zinc-900 dark:text-zinc-200">Class of 2024</span>
                   </div>
                 </div>
 
               </div>
 
-              {/* Row 3: Interests & Curiosity (6 cols) + Professional Goals (6 cols) */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Row 3: Interests & Goals Bento Preview */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6">
                 
-                {/* Interests & Craft */}
-                <div className="lg:col-span-6 glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-5 shadow-sm">
+                {/* 3 Interests (6 cols) */}
+                <div className="md:col-span-6 glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-4 shadow-xs">
                   <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <div className="text-xs font-mono uppercase tracking-wider text-purple-600 dark:text-purple-400 flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        <span>Curiosity & Passion</span>
-                      </div>
-                      <h4 className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
-                        What Drives My Curiosity
-                      </h4>
+                    <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-purple-600 dark:text-purple-400 font-semibold">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Interests & Curiosity</span>
                     </div>
                     <button
                       onClick={() => setActiveTab('interests')}
                       className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Explore</span>
+                      <span>View All</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {aboutMeData.interests.map((interest, i) => {
-                      const IntIcon = iconMap[interest.icon] || Sparkles;
+                  <div className="space-y-2.5">
+                    {aboutMeData.interests.map((item, i) => {
+                      const IntIcon = iconMap[item.icon] || Sparkles;
                       return (
                         <div
                           key={i}
-                          className="p-3.5 rounded-2xl bg-zinc-50/70 dark:bg-white/[0.03] border border-zinc-200/60 dark:border-white/5 space-y-1.5"
+                          className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200/70 dark:border-white/5 flex items-start gap-3"
                         >
-                          <div className="flex items-center gap-2">
-                            <div className="p-1.5 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
-                              <IntIcon className="w-3.5 h-3.5" />
-                            </div>
-                            <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
-                              {interest.category}
-                            </span>
+                          <div className="w-8 h-8 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0 mt-0.5">
+                            <IntIcon className="w-4 h-4" />
                           </div>
-                          <div className="font-semibold text-xs sm:text-sm text-zinc-900 dark:text-white">
-                            {interest.title}
+                          <div className="space-y-0.5">
+                            <h5 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white">
+                              {item.title}
+                            </h5>
+                            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                              {item.desc}
+                            </p>
                           </div>
-                          <p className="text-[11px] text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
-                            {interest.desc}
-                          </p>
                         </div>
                       );
                     })}
                   </div>
                 </div>
 
-                {/* Professional Goals & Value Delivered */}
-                <div className="lg:col-span-6 glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-5 shadow-sm">
+                {/* 2 Strategic Goals (6 cols) */}
+                <div className="md:col-span-6 glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-4 shadow-xs flex flex-col justify-between">
                   <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <div className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                        <Target className="w-3.5 h-3.5" />
-                        <span>Professional Direction</span>
-                      </div>
-                      <h4 className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
-                        Goals & Value on Day 1
-                      </h4>
+                    <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold">
+                      <Target className="w-3.5 h-3.5" />
+                      <span>Goals & Direction</span>
                     </div>
                     <button
-                      onClick={() => setActiveTab('goals')}
+                      onClick={() => setActiveTab('interests')}
                       className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
                     >
                       <span>Details</span>
@@ -399,148 +408,76 @@ export default function About() {
                     {aboutMeData.goals.map((goal, idx) => (
                       <div
                         key={idx}
-                        className="p-3.5 rounded-2xl bg-zinc-50/70 dark:bg-white/[0.03] border border-zinc-200/60 dark:border-white/5 space-y-1"
+                        className="p-4 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200/70 dark:border-white/5 space-y-2"
                       >
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold text-xs sm:text-sm text-zinc-900 dark:text-white">
+                        <div className="flex items-center justify-between gap-2">
+                          <h5 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white">
                             {goal.title}
-                          </span>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold">
+                          </h5>
+                          <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-semibold">
                             {goal.pill}
                           </span>
                         </div>
-                        <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
+                        <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                           {goal.desc}
                         </p>
                       </div>
                     ))}
                   </div>
+
+                  <div className="pt-2 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between text-xs text-zinc-500">
+                    <span>1 Month Notice (Serving)</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-medium">Ready on Day 1</span>
+                  </div>
                 </div>
 
               </div>
+
             </motion.div>
           )}
 
-          {/* TAB 2: MY JOURNEY (EXPANDED TIMELINE) */}
-          {activeTab === 'journey' && (
-            <motion.div
-              key="journey"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-4xl mx-auto space-y-8"
-            >
-              <div className="text-center space-y-2 mb-8">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
-                  My Journey: From IT Engineering to Enterprise Intelligence
-                </h3>
-                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-                  A continuous evolution of applying rigorous systems architecture to high-volume business operations and predictive analytics.
-                </p>
-              </div>
-
-              <div className="space-y-8 relative before:absolute before:left-4 sm:before:left-6 before:top-4 before:bottom-4 before:w-0.5 before:bg-gradient-to-b before:from-sky-500 before:via-indigo-500 before:to-purple-500">
-                {aboutMeData.journey.map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: idx * 0.1 }}
-                    className="relative pl-12 sm:pl-16"
-                  >
-                    {/* Timeline Node */}
-                    <div className="absolute left-2.5 sm:left-4.5 top-5 w-4 h-4 rounded-full bg-white dark:bg-[#121217] border-4 border-sky-500 shadow-md" />
-
-                    <div className="glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm hover:border-sky-500/30 transition-colors">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs font-bold text-sky-600 dark:text-sky-400 px-2.5 py-1 rounded-full bg-sky-500/10">
-                            {item.period}
-                          </span>
-                          <span className="text-xs px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 font-medium">
-                            {item.badge}
-                          </span>
-                        </div>
-                        <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
-                          {item.institution}
-                        </span>
-                      </div>
-
-                      <h4 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white tracking-tight">
-                        {item.title}
-                      </h4>
-
-                      <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                        {item.description}
-                      </p>
-
-                      <div className="pt-2 flex flex-wrap gap-2">
-                        {item.skills.map((skill) => (
-                          <span
-                            key={skill}
-                            className="px-2.5 py-1 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="text-center pt-4">
-                <button
-                  onClick={() => setActiveTab('all')}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
-                >
-                  <span>Return to Bento Overview</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </motion.div>
-          )}
-
-          {/* TAB 3: PROBLEM-SOLVING APPROACH */}
+          {/* TAB 2: PROBLEM-SOLVING (CLEAN 4 STEPS) */}
           {activeTab === 'approach' && (
             <motion.div
               key="approach"
-              initial={{ opacity: 0, y: 16 }}
+              id="about-panel-approach"
+              role="tabpanel"
+              aria-labelledby="about-tab-approach"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-4xl mx-auto space-y-8"
             >
-              <div className="text-center space-y-2 mb-8">
+              <div className="text-center space-y-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-semibold text-sky-600 dark:text-sky-400">
+                  <Search className="w-3.5 h-3.5" />
+                  <span>Disciplined Methodology</span>
+                </div>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
-                  My 4-Step Problem Solving Framework
+                  Four-Step Problem-Solving Framework
                 </h3>
                 <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-                  How I approach messy, fragmented datasets to engineer reliable, automated systems and clear metrics.
+                  A disciplined systems approach that deconstructs operational friction into verifiable data models and executive decision velocity.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {aboutMeData.approach.map((step, idx) => {
+              {/* 4 Cards (2x2 on Desktop, 1 Col on Mobile) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                {aboutMeData.approach.map((step) => {
                   const StepIcon = iconMap[step.icon] || Search;
                   return (
-                    <motion.div
+                    <div
                       key={step.step}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: idx * 0.1 }}
-                      className="glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm flex flex-col justify-between"
+                      className="glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-3.5 shadow-xs flex flex-col justify-between"
                     >
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <span className="font-mono text-sm font-extrabold text-sky-600 dark:text-sky-400 px-3 py-1 rounded-xl bg-sky-500/10">
+                          <span className="font-mono text-xs font-bold text-sky-600 dark:text-sky-400 px-2.5 py-1 rounded-xl bg-sky-500/10 border border-sky-500/20">
                             STEP {step.step}
                           </span>
-                          <div className="w-10 h-10 rounded-2xl bg-zinc-100 dark:bg-white/5 flex items-center justify-center text-sky-600 dark:text-sky-400">
-                            <StepIcon className="w-5 h-5" />
+                          <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-white/5 flex items-center justify-center text-sky-600 dark:text-sky-400">
+                            <StepIcon className="w-4 h-4" />
                           </div>
                         </div>
 
@@ -548,179 +485,18 @@ export default function About() {
                           <h4 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
                             {step.title}
                           </h4>
-                          <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+                          <span className="text-xs font-semibold text-sky-600 dark:text-sky-400 block mt-0.5 font-mono">
                             {step.tagline}
                           </span>
                         </div>
 
-                        <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                        <p className="text-[14px] text-zinc-600 dark:text-zinc-300 leading-relaxed">
                           {step.description}
                         </p>
                       </div>
-
-                      <div className="pt-4 border-t border-zinc-100 dark:border-white/5 flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                        <Check className="w-4 h-4" />
-                        <span>Ensures zero discrepancy & executive trust</span>
-                      </div>
-                    </motion.div>
+                    </div>
                   );
                 })}
-              </div>
-
-              <div className="text-center pt-4">
-                <button
-                  onClick={() => setActiveTab('all')}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
-                >
-                  <span>Return to Bento Overview</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </motion.div>
-          )}
-
-          {/* TAB 4: INTERESTS & CRAFT */}
-          {activeTab === 'interests' && (
-            <motion.div
-              key="interests"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-4xl mx-auto space-y-8"
-            >
-              <div className="text-center space-y-2 mb-8">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
-                  Beyond Static Tables: Interests & Creative Craft
-                </h3>
-                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-                  What excites me outside day-to-day tickets—exploring applied AI, risk dynamics, and human-centric dashboard design.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {aboutMeData.interests.map((interest, i) => {
-                  const IntIcon = iconMap[interest.icon] || Sparkles;
-                  return (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className="glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="w-11 h-11 rounded-2xl bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400">
-                          <IntIcon className="w-5 h-5" />
-                        </div>
-                        <span className="text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">
-                          {interest.category}
-                        </span>
-                      </div>
-
-                      <h4 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
-                        {interest.title}
-                      </h4>
-
-                      <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                        {interest.desc}
-                      </p>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              <div className="text-center pt-4">
-                <button
-                  onClick={() => setActiveTab('all')}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
-                >
-                  <span>Return to Bento Overview</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </motion.div>
-          )}
-
-          {/* TAB 5: GOALS & VALUE ON DAY 1 */}
-          {activeTab === 'goals' && (
-            <motion.div
-              key="goals"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-4xl mx-auto space-y-8"
-            >
-              <div className="text-center space-y-2 mb-8">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
-                  Professional Goals & What I Bring to Your Team
-                </h3>
-                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-                  Where I am heading and the immediate impact you can expect from Day 1.
-                </p>
-              </div>
-
-              <div className="space-y-6">
-                {aboutMeData.goals.map((goal, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: idx * 0.1 }}
-                    className="glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h4 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white tracking-tight">
-                        {goal.title}
-                      </h4>
-                      <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
-                        {goal.pill}
-                      </span>
-                    </div>
-
-                    <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                      {goal.desc}
-                    </p>
-
-                    <div className="pt-2 flex flex-wrap gap-2">
-                      {goal.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Day-1 Impact Callout */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-purple-500/10 border border-sky-500/20 text-center space-y-4">
-                <h4 className="text-xl font-bold text-zinc-950 dark:text-white">
-                  Ready to accelerate your data & operations intelligence?
-                </h4>
-                <p className="text-sm text-zinc-600 dark:text-zinc-300 max-w-lg mx-auto">
-                  Serving 1 month notice at OIA Global. Open to fast-track hiring discussions for Data Analyst and Business Analyst positions.
-                </p>
-                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-                  <a
-                    href="#contact"
-                    className="px-6 py-2.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 text-xs sm:text-sm font-semibold hover:bg-sky-600 dark:hover:bg-sky-400 dark:hover:text-zinc-950 transition-colors shadow-sm"
-                  >
-                    Start a Conversation
-                  </a>
-                  <a
-                    href="#projects"
-                    className="px-6 py-2.5 rounded-full glass-panel text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
-                  >
-                    Inspect Featured Projects
-                  </a>
-                </div>
               </div>
 
               <div className="text-center pt-2">
@@ -728,7 +504,251 @@ export default function About() {
                   onClick={() => setActiveTab('all')}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
                 >
-                  <span>Return to Bento Overview</span>
+                  <span>Return to Overview</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* TAB 3: MY JOURNEY (3 MILESTONES WITH EXPANDABLE DETAIL VIEW) */}
+          {activeTab === 'journey' && (
+            <motion.div
+              key="journey"
+              id="about-panel-journey"
+              role="tabpanel"
+              aria-labelledby="about-tab-journey"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-4xl mx-auto space-y-8"
+            >
+              <div className="text-center space-y-2 mb-6">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+                  <Compass className="w-3.5 h-3.5" />
+                  <span>Timeline</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
+                  My Journey: Engineering to Enterprise Intelligence
+                </h3>
+                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+                  A deliberate progression from IT engineering foundations to enterprise data systems and predictive analytics.
+                </p>
+              </div>
+
+              {/* 3 Prominent Milestones with Expandable Details */}
+              <div className="space-y-6 relative before:absolute before:left-4 sm:before:left-6 before:top-4 before:bottom-4 before:w-0.5 before:bg-gradient-to-b before:from-sky-500 before:via-indigo-500 before:to-purple-500">
+                {aboutMeData.journey.map((item, idx) => {
+                  const isExpanded = expandedMilestones[idx];
+                  return (
+                    <div key={idx} className="relative pl-11 sm:pl-16">
+                      {/* Timeline Node */}
+                      <div className="absolute left-2 sm:left-4 top-5 w-4 h-4 rounded-full bg-white dark:bg-[#121217] border-4 border-sky-500 shadow-xs" />
+
+                      <div className="glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-3.5 shadow-xs hover:border-sky-500/30 transition-colors">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-xs font-bold text-sky-600 dark:text-sky-400 px-2.5 py-1 rounded-full bg-sky-500/10">
+                              {item.period}
+                            </span>
+                            <span className="text-xs px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 font-medium">
+                              {item.badge}
+                            </span>
+                          </div>
+                          <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                            {item.institution}
+                          </span>
+                        </div>
+
+                        <div>
+                          <h4 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
+                            {item.title}
+                          </h4>
+                          {item.qualification && (
+                            <span className="text-xs text-sky-600 dark:text-sky-400 font-medium block mt-0.5">
+                              {item.qualification}
+                            </span>
+                          )}
+                        </div>
+
+                        <p className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                          {item.description}
+                        </p>
+
+                        {/* Expandable Detail View */}
+                        {item.details && (
+                          <div className="pt-2">
+                            <button
+                              onClick={() => toggleMilestone(idx)}
+                              className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 cursor-pointer select-none transition-colors"
+                              aria-expanded={isExpanded}
+                            >
+                              <span>{isExpanded ? 'Hide Details' : 'View Key Milestones'}</span>
+                              {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                            </button>
+
+                            <AnimatePresence>
+                              {isExpanded && (
+                                <motion.div
+                                  initial={{ opacity: 0, height: 0 }}
+                                  animate={{ opacity: 1, height: 'auto' }}
+                                  exit={{ opacity: 0, height: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="overflow-hidden pt-3"
+                                >
+                                  <ul className="space-y-2 p-3.5 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200/70 dark:border-white/5 text-xs text-zinc-600 dark:text-zinc-300">
+                                    {item.details.map((detail, dIdx) => (
+                                      <li key={dIdx} className="flex items-start gap-2">
+                                        <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                                        <span>{detail}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        )}
+
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="text-center pt-2">
+                <button
+                  onClick={() => setActiveTab('all')}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+                >
+                  <span>Return to Overview</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* TAB 4: INTERESTS & STRATEGIC GOALS */}
+          {activeTab === 'interests' && (
+            <motion.div
+              key="interests"
+              id="about-panel-interests"
+              role="tabpanel"
+              aria-labelledby="about-tab-interests"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-4xl mx-auto space-y-8"
+            >
+              <div className="text-center space-y-2 mb-6">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold text-purple-600 dark:text-purple-400">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Curiosity & Impact</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
+                  Interests & Professional Direction
+                </h3>
+                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+                  What drives my continuous curiosity and what I bring to high-performing data teams.
+                </p>
+              </div>
+
+              {/* 3 Interests Cards */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 px-1">
+                  Technical Interests
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {aboutMeData.interests.map((interest, i) => {
+                    const IntIcon = iconMap[interest.icon] || Sparkles;
+                    return (
+                      <div
+                        key={i}
+                        className="glass-panel rounded-3xl p-5 sm:p-6 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-3 shadow-xs flex flex-col justify-between"
+                      >
+                        <div className="w-9 h-9 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+                          <IntIcon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h5 className="text-base font-bold text-zinc-950 dark:text-white tracking-tight mb-1">
+                            {interest.title}
+                          </h5>
+                          <p className="text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                            {interest.desc}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 2 Strategic Goals Cards */}
+              <div className="space-y-3 pt-4">
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 px-1">
+                  Professional Goals & Value
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {aboutMeData.goals.map((goal, idx) => (
+                    <div
+                      key={idx}
+                      className="glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 space-y-4 shadow-xs flex flex-col justify-between"
+                    >
+                      <div className="space-y-2.5">
+                        <div className="flex items-center justify-between gap-2">
+                          <h5 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
+                            {goal.title}
+                          </h5>
+                          <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
+                            {goal.pill}
+                          </span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                          {goal.desc}
+                        </p>
+                      </div>
+
+                      <div className="pt-2 flex flex-wrap gap-1.5 border-t border-zinc-100 dark:border-white/5">
+                        {goal.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Ready to Connect Callout */}
+              <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-sky-500/10 via-indigo-500/5 to-transparent border border-sky-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h5 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white">
+                    Available on 1 Month Notice
+                  </h5>
+                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-0.5">
+                    Fast-track onboarding for Data Analyst and Business Analyst opportunities.
+                  </p>
+                </div>
+                <a
+                  href="#contact"
+                  className="px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 text-xs sm:text-sm font-semibold hover:bg-sky-600 dark:hover:bg-sky-400 dark:hover:text-zinc-950 transition-colors shadow-xs whitespace-nowrap text-center"
+                >
+                  Start a Conversation
+                </a>
+              </div>
+
+              <div className="text-center pt-2">
+                <button
+                  onClick={() => setActiveTab('all')}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+                >
+                  <span>Return to Overview</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>

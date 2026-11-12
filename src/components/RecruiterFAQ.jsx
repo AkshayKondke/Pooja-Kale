@@ -73,14 +73,14 @@ export default function RecruiterFAQ() {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-2xl"
+                  className="w-full p-4 sm:p-6 text-left flex items-center justify-between gap-3 sm:gap-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-2xl min-h-[52px] cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-semibold block mb-0.5">
+                      <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
                         {faq.tag}
                       </span>
                       <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white">
@@ -101,7 +101,7 @@ export default function RecruiterFAQ() {
                     id={panelId}
                     role="region"
                     aria-labelledby={buttonId}
-                    className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed border-t border-zinc-100 dark:border-white/5 animate-in fade-in duration-200"
+                    className="px-4 pb-4 sm:px-6 sm:pb-6 pt-0 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed border-t border-zinc-100 dark:border-white/5 animate-in fade-in duration-200"
                   >
                     <p className="mt-3">{faq.answer}</p>
                   </div>

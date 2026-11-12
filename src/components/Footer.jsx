@@ -30,11 +30,12 @@ export default function Footer() {
           <span>Apple-Inspired Clean UI</span>
         </div>
 
-        {/* Back to top */}
+        {/* Back to top: Min 44px touch target */}
         <button
           onClick={scrollToTop}
-          className="p-2.5 rounded-full glass-panel hover:text-sky-600 dark:hover:text-sky-400 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/10 transition-colors flex items-center gap-1.5 text-xs shadow-sm"
+          className="min-h-[44px] px-4 py-2.5 rounded-full glass-panel hover:text-sky-600 dark:hover:text-sky-400 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/10 transition-colors flex items-center gap-1.5 text-xs shadow-sm cursor-pointer active:scale-95"
           title="Back to Top"
+          aria-label="Back to Top"
         >
           <span>Top</span>
           <ArrowUp className="w-3.5 h-3.5" />

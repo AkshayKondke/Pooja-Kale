@@ -25,13 +25,13 @@ export default function Experience() {
         </div>
 
         {/* Continuous Connected Timeline Layout */}
-        <div className="relative pl-6 sm:pl-10 space-y-12 before:absolute before:left-2.5 sm:before:left-3.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-sky-500 before:via-indigo-500 before:to-zinc-300 dark:before:to-zinc-800">
+        <div className="relative pl-7 sm:pl-10 space-y-12 before:absolute before:left-[11px] sm:before:left-[15px] before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-sky-500 before:via-indigo-500 before:to-zinc-300 dark:before:to-zinc-800">
           
           {/* Milestone 1: Enterprise Experience at OIA Global */}
           <div className="relative space-y-4">
             
-            {/* Timeline Marker Node */}
-            <div className="absolute -left-6 sm:-left-10 top-1 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-sky-500 text-white flex items-center justify-center shadow-md shadow-sky-500/25 ring-4 ring-white dark:ring-[#09090b]">
+            {/* Timeline Marker Node: Centered on vertical line */}
+            <div className="absolute -left-7 sm:-left-10 top-1 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-sky-500 text-white flex items-center justify-center shadow-md shadow-sky-500/25 ring-4 ring-white dark:ring-[#09090b]">
               <Building2 className="w-3 sm:w-4 h-3 sm:h-4" />
             </div>
 
@@ -39,11 +39,11 @@ export default function Experience() {
             {experienceData.map((exp, idx) => (
               <div
                 key={idx}
-                className="glass-panel rounded-3xl p-6 sm:p-8 border border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 shadow-sm space-y-6"
+                className="glass-panel rounded-3xl p-4 sm:p-6 sm:p-8 border border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 shadow-sm space-y-6"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-zinc-100 dark:border-white/5">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-semibold block mb-0.5">
+                    <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
                       Current Enterprise Role
                     </span>
                     <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
@@ -97,8 +97,8 @@ export default function Experience() {
           {/* Milestone 2: Genuine Professional Achievements & Recognition */}
           <div className="relative space-y-4 pt-2">
             
-            {/* Timeline Marker Node */}
-            <div className="absolute -left-6 sm:-left-10 top-1 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-md shadow-indigo-500/25 ring-4 ring-white dark:ring-[#09090b]">
+            {/* Timeline Marker Node: Centered on vertical line */}
+            <div className="absolute -left-7 sm:-left-10 top-1 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-md shadow-indigo-500/25 ring-4 ring-white dark:ring-[#09090b]">
               <Trophy className="w-3 sm:w-4 h-3 sm:h-4" />
             </div>
 
@@ -117,7 +117,7 @@ export default function Experience() {
                     className="glass-panel rounded-2xl p-5 border border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 shadow-sm space-y-3"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 font-semibold border border-indigo-500/20">
+                      <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 font-semibold border border-indigo-500/20">
                         {item.highlight}
                       </span>
                       <span className="text-xs font-mono font-bold text-zinc-950 dark:text-white">
@@ -135,7 +135,7 @@ export default function Experience() {
 
                     <div className="pt-2 border-t border-zinc-100 dark:border-white/5 flex flex-wrap gap-1">
                       {item.tags.map((tag, i) => (
-                        <span key={i} className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-500">
+                        <span key={i} className="text-xs font-mono px-2.5 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 font-medium">
                           {tag}
                         </span>
                       ))}
@@ -150,8 +150,8 @@ export default function Experience() {
           {/* Milestone 3: Academic Foundation & B.E. Degree */}
           <div className="relative space-y-4 pt-2">
             
-            {/* Timeline Marker Node */}
-            <div className="absolute -left-6 sm:-left-10 top-1 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-500 text-white flex items-center justify-center shadow-md shadow-purple-500/25 ring-4 ring-white dark:ring-[#09090b]">
+            {/* Timeline Marker Node: Centered on vertical line */}
+            <div className="absolute -left-7 sm:-left-10 top-1 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-500 text-white flex items-center justify-center shadow-md shadow-purple-500/25 ring-4 ring-white dark:ring-[#09090b]">
               <GraduationCap className="w-3 sm:w-4 h-3 sm:h-4" />
             </div>
 

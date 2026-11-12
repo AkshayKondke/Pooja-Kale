@@ -116,16 +116,16 @@ export default function Contact() {
                 <div className="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400 shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <div className="text-[11px] text-zinc-500 font-mono uppercase">Direct Email</div>
-                  <a href={`mailto:${personalInfo.email}`} className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+                  <a href={`mailto:${personalInfo.email}`} className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition-colors truncate block">
                     {personalInfo.email}
                   </a>
                 </div>
               </div>
               <button
                 onClick={() => copyToClipboard(personalInfo.email, 'email')}
-                className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors shrink-0"
                 title="Copy Email to Clipboard"
                 aria-label="Copy Email"
               >
@@ -135,20 +135,20 @@ export default function Contact() {
 
             {/* Phone Card */}
             <div className="glass-panel rounded-2xl p-4 sm:p-5 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 shadow-sm flex items-center justify-between group">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0 flex-1 pr-2">
                 <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <div className="text-[11px] text-zinc-500 font-mono uppercase">Phone / WhatsApp</div>
-                  <a href={`tel:${personalInfo.phone}`} className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                  <a href={`tel:${personalInfo.phone}`} className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors truncate block">
                     {personalInfo.phone}
                   </a>
                 </div>
               </div>
               <button
                 onClick={() => copyToClipboard(personalInfo.phone, 'phone')}
-                className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors shrink-0"
                 title="Copy Phone to Clipboard"
                 aria-label="Copy Phone"
               >
@@ -163,18 +163,18 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="glass-panel glass-panel-hover rounded-2xl p-4 sm:p-5 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 shadow-sm flex items-center justify-between block group"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0 flex-1 pr-2">
                 <div className="w-10 h-10 rounded-xl bg-[#0077b5]/15 flex items-center justify-center text-[#0077b5] shrink-0">
                   <Linkedin className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <div className="text-[11px] text-zinc-500 font-mono uppercase">LinkedIn Network</div>
-                  <span className="text-sm font-semibold text-zinc-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                  <span className="text-sm font-semibold text-zinc-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors truncate block">
                     linkedin.com/in/pooja-kale
                   </span>
                 </div>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-sky-500 transition-colors" />
+              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-sky-500 transition-colors shrink-0" />
             </a>
 
             {/* GitHub Card */}
@@ -184,18 +184,18 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="glass-panel glass-panel-hover rounded-2xl p-4 sm:p-5 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 shadow-sm flex items-center justify-between block group"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0 flex-1 pr-2">
                 <div className="w-10 h-10 rounded-xl bg-zinc-900/10 dark:bg-white/10 flex items-center justify-center text-zinc-900 dark:text-white shrink-0">
                   <Github className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <div className="text-[11px] text-zinc-500 font-mono uppercase">GitHub Repositories</div>
-                  <span className="text-sm font-semibold text-zinc-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                  <span className="text-sm font-semibold text-zinc-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors truncate block">
                     github.com/poojakale
                   </span>
                 </div>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-sky-500 transition-colors" />
+              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-sky-500 transition-colors shrink-0" />
             </a>
 
             {/* Location & Notice Badge */}
@@ -308,7 +308,7 @@ export default function Contact() {
                         setFormData({ ...formData, email: e.target.value });
                         if (errors.email) setErrors({ ...errors, email: '' });
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-black/40 border text-zinc-900 dark:text-white placeholder-zinc-400 text-xs sm:text-sm focus:outline-none transition-colors ${
+                      className={`w-full px-3.5 py-2.5 min-h-[44px] rounded-xl bg-zinc-50 dark:bg-black/40 border text-zinc-900 dark:text-white placeholder-zinc-400 text-xs sm:text-sm focus:outline-none transition-colors ${
                         errors.email ? 'border-red-500 focus:border-red-500' : 'border-zinc-200 dark:border-white/10 focus:border-sky-500'
                       }`}
                     />
@@ -329,7 +329,7 @@ export default function Contact() {
                   <select
                     value={formData.roleType}
                     onChange={(e) => setFormData({ ...formData, roleType: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-sky-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-sky-500 transition-colors"
                   >
                     <option value="Data Analyst (Full-Time)">Data Analyst (Full-Time)</option>
                     <option value="Business Analyst (Operations / BI)">Business Analyst (Operations / BI)</option>
@@ -364,11 +364,11 @@ export default function Contact() {
                   )}
                 </div>
 
-                {/* Submit button */}
+                {/* Submit button: Min 48px touch height */}
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 via-indigo-500 to-indigo-600 text-white font-bold text-xs sm:text-sm hover:opacity-95 disabled:opacity-50 transition-opacity flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20 active:scale-[0.99]"
+                  className="w-full min-h-[48px] py-3.5 rounded-xl bg-gradient-to-r from-sky-500 via-indigo-500 to-indigo-600 text-white font-bold text-xs sm:text-sm hover:opacity-95 disabled:opacity-50 transition-opacity flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20 active:scale-[0.99] cursor-pointer"
                 >
                   {status === 'loading' ? (
                     <>

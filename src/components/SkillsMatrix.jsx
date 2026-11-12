@@ -122,7 +122,7 @@ export default function SkillsMatrix() {
             return (
               <div
                 key={category.id}
-                className="glass-panel glass-panel-hover rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 flex flex-col justify-between shadow-sm relative overflow-hidden group"
+                className="glass-panel glass-panel-hover rounded-3xl p-4 sm:p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#121217]/60 flex flex-col justify-between shadow-sm relative overflow-hidden group"
               >
                 <div>
                   {/* Category Header */}
@@ -135,7 +135,7 @@ export default function SkillsMatrix() {
                         {category.name}
                       </h3>
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-white/5">
+                    <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/5 shrink-0 font-medium">
                       {category.skills.length} tools
                     </span>
                   </div>
@@ -147,23 +147,23 @@ export default function SkillsMatrix() {
                       const project = projectMapping[skill.name] || "Enterprise Operations at OIA Global";
 
                       return (
-                        <div key={idx} className="p-3 rounded-2xl bg-zinc-50/70 dark:bg-white/[0.02] border border-zinc-200/60 dark:border-white/5 space-y-1.5">
-                          <div className="flex items-center justify-between gap-2">
+                        <div key={idx} className="p-3.5 rounded-2xl bg-zinc-50/70 dark:bg-white/[0.02] border border-zinc-200/60 dark:border-white/5 space-y-2">
+                          <div className="flex flex-wrap items-center justify-between gap-1.5">
                             <h4 className="font-bold text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 tracking-tight">
                               {skill.name}
                             </h4>
-                            <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border ${tier.style}`}>
+                            <span className={`text-xs font-mono px-2.5 py-0.5 rounded-full font-semibold border ${tier.style} shrink-0`}>
                               {tier.label}
                             </span>
                           </div>
 
-                          <p className="text-[11px] text-zinc-600 dark:text-zinc-300 leading-snug">
+                          <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-snug">
                             {skill.desc}
                           </p>
 
                           {/* Demonstrated in Project */}
-                          <div className="pt-1.5 mt-1 border-t border-zinc-200/40 dark:border-white/5 flex items-center gap-1.5 text-[10px] font-mono text-sky-600 dark:text-sky-400">
-                            <Check className="w-3 h-3 text-sky-500 shrink-0" />
+                          <div className="pt-1.5 mt-1 border-t border-zinc-200/40 dark:border-white/5 flex items-center gap-1.5 text-xs font-mono text-sky-600 dark:text-sky-400">
+                            <Check className="w-3.5 h-3.5 text-sky-500 shrink-0" />
                             <span className="truncate">Demonstrated: {project}</span>
                           </div>
                         </div>
@@ -182,7 +182,7 @@ export default function SkillsMatrix() {
         </div>
 
         {/* Verified Certifications & Credentials Grid */}
-        <div id="certifications" className="space-y-6 scroll-mt-24 sm:scroll-mt-28">
+        <div id="skills-cert-preview" className="space-y-6 scroll-mt-24 sm:scroll-mt-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-3 border-b border-zinc-200 dark:border-white/10">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider font-mono mb-1">
@@ -206,31 +206,31 @@ export default function SkillsMatrix() {
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-semibold border border-emerald-500/20">
+                    <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-semibold border border-emerald-500/20">
                       {cert.status} • {cert.issueDate}
                     </span>
-                    <span className="text-[10px] font-mono text-zinc-400">
+                    <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 font-medium">
                       {cert.category}
                     </span>
                   </div>
 
-                  <h4 className="text-sm font-bold text-zinc-900 dark:text-white tracking-tight leading-snug">
+                  <h4 className="text-sm sm:text-[15px] font-bold text-zinc-900 dark:text-white tracking-tight leading-snug">
                     {cert.title}
                   </h4>
 
-                  <div className="text-xs font-medium text-sky-600 dark:text-sky-400 mt-1 mb-2">
+                  <div className="text-xs font-semibold text-sky-600 dark:text-sky-400 mt-1 mb-2">
                     {cert.issuer}
                   </div>
 
-                  <p className="text-[11px] text-zinc-600 dark:text-zinc-300 leading-relaxed mb-3">
+                  <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed mb-3">
                     {cert.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1.5">
                     {cert.skillsValidated.slice(0, 3).map((s, i) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-[10px] font-mono text-zinc-600 dark:text-zinc-400"
+                        className="px-2.5 py-0.5 rounded-md bg-zinc-100 dark:bg-white/5 text-xs font-mono text-zinc-600 dark:text-zinc-300 font-medium"
                       >
                         {s}
                       </span>
@@ -239,7 +239,7 @@ export default function SkillsMatrix() {
                 </div>
 
                 <div className="pt-3 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-zinc-400">Audited Curriculum</span>
+                  <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">Audited Curriculum</span>
                   <a
                     href={cert.credentialUrl}
                     target="_blank"

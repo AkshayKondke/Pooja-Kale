@@ -108,8 +108,8 @@ export default function Certifications() {
           </div>
         </div>
 
-        {/* Top 4 KPI Metric Pills */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4 mb-12 sm:mb-16">
+        {/* Top 4 KPI Metric Pills: Responsive grid & padding */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12 sm:mb-16">
           {keyStats.map((stat, idx) => {
             const StatIcon = stat.icon;
             return (
@@ -119,20 +119,20 @@ export default function Certifications() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: idx * 0.08 }}
-                className="glass-panel rounded-2xl p-4 sm:p-5 border-zinc-200/80 dark:border-white/10 bg-white/70 dark:bg-[#121217]/60 shadow-sm space-y-1.5"
+                className="glass-panel rounded-2xl p-3.5 sm:p-5 border-zinc-200/80 dark:border-white/10 bg-white/70 dark:bg-[#121217]/60 shadow-sm space-y-1.5"
               >
                 <div className="flex items-center justify-between">
                   <span className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${stat.color}`}>
                     {stat.value}
                   </span>
-                  <div className="p-2 rounded-xl bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400">
-                    <StatIcon className="w-4 h-4" />
+                  <div className="p-1.5 sm:p-2 rounded-xl bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400">
+                    <StatIcon className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                   </div>
                 </div>
                 <div className="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white">
                   {stat.label}
                 </div>
-                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-snug">
+                <p className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400 leading-snug">
                   {stat.desc}
                 </p>
               </motion.div>
@@ -242,7 +242,7 @@ export default function Certifications() {
                       <motion.div
                         key={cert.id}
                         whileHover={{ y: -4 }}
-                        className="glass-panel rounded-3xl p-6 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm hover:border-sky-500/30 transition-all flex flex-col justify-between"
+                        className="glass-panel rounded-3xl p-4 sm:p-6 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm hover:border-sky-500/30 transition-all flex flex-col justify-between"
                       >
                         <div className="space-y-3">
                           {/* Issuer & Verification Pill */}

@@ -39,18 +39,18 @@ export default function Hero() {
           className="text-center flex flex-col items-center"
         >
           
-          {/* 1. Avatar Monogram: ~80px (w-20 h-20), pure white initials (#FFFFFF), 800 weight, blue-purple gradient */}
+          {/* 1. Avatar Monogram: 64px mobile to 80px desktop, pure white initials, blue-purple gradient */}
           <motion.div variants={itemVariants} className="relative group select-none">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-600 shadow-xl shadow-sky-500/25 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <span className="text-white font-extrabold text-2xl sm:text-3xl tracking-tight relative z-10">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-600 shadow-xl shadow-sky-500/25 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+              <span className="text-white font-extrabold text-xl sm:text-2xl md:text-3xl tracking-tight relative z-10">
                 PK
               </span>
             </div>
             {/* Emerald Availability Status Dot */}
-            <div className="absolute -bottom-0.5 -right-0.5 p-1 bg-white dark:bg-[#121217] rounded-full shadow-md z-20">
-              <span className="relative flex h-3.5 w-3.5">
+            <div className="absolute -bottom-0.5 -right-0.5 p-0.5 sm:p-1 bg-white dark:bg-[#121217] rounded-full shadow-md z-20">
+              <span className="relative flex h-3 w-3 sm:h-3.5 sm:w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white dark:border-[#121217]" />
+                <span className="relative inline-flex rounded-full h-3 w-3 sm:h-3.5 sm:w-3.5 bg-emerald-500 border-2 border-white dark:border-[#121217]" />
               </span>
             </div>
           </motion.div>
@@ -58,7 +58,7 @@ export default function Hero() {
           {/* 2. Role & Location Pill Badge: 10–12px below avatar */}
           <motion.div
             variants={itemVariants}
-            className="mt-[11px] inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm cursor-default select-none"
+            className="mt-[11px] inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full glass-panel text-[11px] sm:text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm cursor-default select-none"
           >
             <span className="w-2 h-2 rounded-full bg-sky-500" />
             <span className="font-semibold text-zinc-900 dark:text-zinc-100">Data & Business Analyst</span>
@@ -69,10 +69,10 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* 3. Main Display Headline: 18–22px below badge; Desktop ~64–68px; Line-height ~1.0; Blue gradient on Data Intelligence */}
+          {/* 3. Main Display Headline: Fluid responsive clamp, Apple line-height */}
           <motion.h1
             variants={itemVariants}
-            className="mt-[20px] text-[clamp(2.35rem,5.2vw,4.125rem)] font-extrabold tracking-[-0.035em] text-zinc-950 dark:text-white leading-[1.03]"
+            className="mt-[20px] text-[clamp(2.15rem,6.8vw,4.125rem)] font-extrabold tracking-[-0.035em] text-zinc-950 dark:text-white leading-[1.08] sm:leading-[1.03]"
           >
             Architecting <br className="hidden sm:inline" />
             <span className="text-gradient-blue">Data Intelligence</span> <br className="hidden sm:inline" />
@@ -87,14 +87,14 @@ export default function Hero() {
             I specialize in <strong className="text-zinc-900 dark:text-white font-semibold">Power BI, SQL, Python, and ERP systems</strong> (Workday & CargoWise) to eliminate reporting bottlenecks, track operational KPIs, and translate high-volume transactional records into executive decisions.
           </motion.p>
 
-          {/* 5. Primary Action Buttons: 20–24px below description; visually consistent height & padding */}
+          {/* 5. Primary Action Buttons: Stacked full-width touch buttons on mobile, inline on desktop */}
           <motion.div
             variants={itemVariants}
-            className="mt-[22px] flex flex-wrap items-center justify-center gap-3"
+            className="mt-[22px] flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto max-w-xs sm:max-w-none"
           >
             <a
               href="#projects"
-              className="h-11 sm:h-12 px-6 rounded-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-sky-600 dark:hover:bg-sky-400 dark:hover:text-zinc-950 active:scale-[0.98] transition-all duration-200 shadow-md flex items-center gap-2 select-none"
+              className="h-12 px-6 rounded-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-sky-600 dark:hover:bg-sky-400 dark:hover:text-zinc-950 active:scale-[0.98] transition-all duration-200 shadow-md flex items-center justify-center gap-2 select-none"
             >
               <span>Explore Projects</span>
               <ArrowRight className="w-4 h-4" />
@@ -102,7 +102,7 @@ export default function Hero() {
 
             <a
               href="#live-dashboard"
-              className="h-11 sm:h-12 px-6 rounded-full glass-panel text-zinc-800 dark:text-zinc-200 font-semibold text-xs sm:text-sm hover:border-sky-500/40 hover:bg-black/[0.03] dark:hover:bg-white/[0.06] active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center gap-2 select-none"
+              className="h-12 px-6 rounded-full glass-panel text-zinc-800 dark:text-zinc-200 font-semibold text-xs sm:text-sm hover:border-sky-500/40 hover:bg-black/[0.03] dark:hover:bg-white/[0.06] active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center justify-center gap-2 select-none"
             >
               <BarChart3 className="w-4 h-4 text-sky-500" />
               <span>Interactive BI Demo</span>
@@ -112,17 +112,17 @@ export default function Hero() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-11 sm:h-12 px-5 rounded-full glass-panel text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 font-medium text-xs sm:text-sm active:scale-[0.98] transition-all shadow-sm flex items-center gap-2 select-none"
+              className="h-12 px-5 rounded-full glass-panel text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 font-medium text-xs sm:text-sm active:scale-[0.98] transition-all shadow-sm flex items-center justify-center gap-2 select-none"
             >
               <Download className="w-4 h-4" />
               <span>Resume PDF</span>
             </a>
           </motion.div>
 
-          {/* 6. Micro Stack Technology Chips: 24–28px below buttons; balanced pills */}
+          {/* 6. Micro Stack Technology Chips: balanced wrapping & compact mobile padding */}
           <motion.div
             variants={itemVariants}
-            className="mt-[26px] flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-mono"
+            className="mt-[26px] flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-400 font-mono font-medium"
           >
             <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5">Power BI (Advanced DAX)</span>
             <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5">SQL (CTEs & Window Functions)</span>
@@ -139,7 +139,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 sm:mt-12 grid grid-cols-1 min-[420px]:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 max-w-4xl mx-auto w-full items-stretch"
+          className="mt-10 sm:mt-12 grid grid-cols-1 min-[380px]:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 max-w-4xl mx-auto w-full items-stretch"
         >
           {keyMetrics.map((metric, idx) => (
             <div
