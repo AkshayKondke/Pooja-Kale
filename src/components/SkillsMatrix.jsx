@@ -182,7 +182,7 @@ export default function SkillsMatrix() {
         </div>
 
         {/* Verified Certifications & Credentials Grid */}
-        <div className="space-y-6">
+        <div id="certifications" className="space-y-6 scroll-mt-24 sm:scroll-mt-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-3 border-b border-zinc-200 dark:border-white/10">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider font-mono mb-1">
