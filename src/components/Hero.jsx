@@ -1,9 +1,80 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BarChart3, Download, MapPin } from 'lucide-react';
-import { personalInfo, keyMetrics } from '../data/portfolioData';
+import {
+  ArrowRight, BarChart3, Download, MapPin, Database,
+  Layers, TrendingUp, ShieldCheck
+} from 'lucide-react';
+import { keyMetrics } from '../data/portfolioData';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function Hero() {
+  const specializations = [
+    {
+      phrase: "Workday ERP Integration",
+      label: "Workday ERP",
+      icon: Database,
+      highlight: "Financial Operations & Sub-Ledger Balancing",
+    },
+    {
+      phrase: "CargoWise Data Pipelines",
+      label: "CargoWise",
+      icon: Layers,
+      highlight: "Customs & Freight AP/AR Reconciliation",
+    },
+    {
+      phrase: "Data & Business Analytics",
+      label: "Data Analyst",
+      icon: TrendingUp,
+      highlight: "Executive Decision Systems & Operational KPIs",
+    },
+    {
+      phrase: "Automated Reconciliation",
+      label: "Financial Systems",
+      icon: ShieldCheck,
+      highlight: "60% Discrepancy Verification Overhead Saved",
+    },
+    {
+      phrase: "Executive Power BI Models",
+      label: "Power BI & DAX",
+      icon: BarChart3,
+      highlight: "Dimensional Star Schema & Time Intelligence",
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(65);
+
+  // Typewriter effect logic
+  useEffect(() => {
+    const currentPhrase = specializations[currentIndex].phrase;
+
+    const handleTyping = () => {
+      if (!isDeleting) {
+        if (displayedText.length < currentPhrase.length) {
+          setDisplayedText(currentPhrase.slice(0, displayedText.length + 1));
+          setTypingSpeed(55 + Math.random() * 20);
+        } else {
+          setTypingSpeed(2400); // Generous pause after phrase completes
+          setIsDeleting(true);
+        }
+      } else {
+        if (displayedText.length > 0) {
+          setDisplayedText(currentPhrase.slice(0, displayedText.length - 1));
+          setTypingSpeed(28); // Snappy delete
+        } else {
+          setIsDeleting(false);
+          setCurrentIndex((prev) => (prev + 1) % specializations.length);
+          setTypingSpeed(450); // Pause before next phrase
+        }
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, currentIndex, typingSpeed, specializations]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,11 +96,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative pt-[124px] sm:pt-[136px] md:pt-[144px] pb-8 sm:pb-10 scroll-mt-28 overflow-hidden">
-      
-      {/* Background Ambient Spotlight Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-gradient-to-tr from-sky-500/10 via-indigo-500/10 to-transparent blur-[120px] pointer-events-none" />
-
+    <section id="hero" className="relative pt-[116px] sm:pt-[130px] md:pt-[140px] pb-12 sm:pb-16 scroll-mt-28 bg-white dark:bg-black">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
         
         <motion.div
@@ -39,62 +106,65 @@ export default function Hero() {
           className="text-center flex flex-col items-center"
         >
           
-          {/* 1. Avatar Monogram: 64px mobile to 80px desktop, pure white initials, blue-purple gradient */}
+          {/* 1. Avatar Monogram: Apple Minimal clean badge */}
           <motion.div variants={itemVariants} className="relative group select-none">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-600 shadow-xl shadow-sky-500/25 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <span className="text-white font-extrabold text-xl sm:text-2xl md:text-3xl tracking-tight relative z-10">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0071E3] flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shadow-none">
+              <span className="text-white font-bold text-xl sm:text-2xl md:text-3xl tracking-tight relative z-10">
                 PK
               </span>
             </div>
             {/* Emerald Availability Status Dot */}
-            <div className="absolute -bottom-0.5 -right-0.5 p-0.5 sm:p-1 bg-white dark:bg-[#121217] rounded-full shadow-md z-20">
+            <div className="absolute -bottom-0.5 -right-0.5 p-0.5 sm:p-1 bg-white dark:bg-black rounded-full z-20">
               <span className="relative flex h-3 w-3 sm:h-3.5 sm:w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 sm:h-3.5 sm:w-3.5 bg-emerald-500 border-2 border-white dark:border-[#121217]" />
+                <span className="relative inline-flex rounded-full h-3 w-3 sm:h-3.5 sm:w-3.5 bg-emerald-500 border-2 border-white dark:border-black" />
               </span>
             </div>
           </motion.div>
 
-          {/* 2. Role & Location Pill Badge: 10–12px below avatar */}
+          {/* 2. Role & Location Pill Badge */}
           <motion.div
             variants={itemVariants}
-            className="mt-[11px] inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full glass-panel text-[11px] sm:text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm cursor-default select-none"
+            className="mt-3.5 inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] dark:bg-[#161617] text-xs font-medium text-[#1D1D1F] dark:text-[#F5F5F7] border border-[#E5E7EB] dark:border-[#2C2C2E] select-none"
           >
-            <span className="w-2 h-2 rounded-full bg-sky-500" />
-            <span className="font-semibold text-zinc-900 dark:text-zinc-100">Data & Business Analyst</span>
-            <span className="text-zinc-400 dark:text-zinc-500">•</span>
-            <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
-              <MapPin className="w-3 h-3 text-sky-500" />
+            <span className="w-2 h-2 rounded-full bg-[#0071E3]" />
+            <span className="font-semibold">Data & Business Analyst</span>
+            <span className="text-[#86868B]">•</span>
+            <span className="flex items-center gap-1 text-[#6E6E73] dark:text-[#86868B]">
+              <MapPin className="w-3 h-3 text-[#0071E3]" />
               Pune, India
             </span>
           </motion.div>
 
-          {/* 3. Main Display Headline: Fluid responsive clamp, Apple line-height */}
+          {/* 3. Main Display Headline: Spacious, non-overlapping Apple typography */}
           <motion.h1
             variants={itemVariants}
-            className="mt-[20px] text-[clamp(2.15rem,6.8vw,4.125rem)] font-extrabold tracking-[-0.035em] text-zinc-950 dark:text-white leading-[1.08] sm:leading-[1.03]"
+            className="mt-6 sm:mt-7 text-[clamp(2.1rem,5.4vw,3.35rem)] font-bold tracking-tight text-[#1D1D1F] dark:text-white leading-[1.24] text-center"
           >
-            Architecting <br className="hidden sm:inline" />
-            <span className="text-gradient-blue">Data Intelligence</span> <br className="hidden sm:inline" />
+            Architecting
+            <span className="block my-2 sm:my-2.5 text-[#0071E3] dark:text-[#2997FF] min-h-[1.28em]">
+              <span>{displayedText}</span>
+              <span className="inline-block w-[2.5px] sm:w-[3.5px] h-[0.82em] ml-1.5 bg-[#0071E3] dark:bg-[#2997FF] rounded-full animate-cursor-blink align-baseline" />
+            </span>
             for Enterprise Scale.
           </motion.h1>
 
-          {/* 4. Sub-headline: 16–20px below headline; max-w-2xl; comfortable line-height */}
+          {/* 4. Sub-headline: Generous line-height and breathing room */}
           <motion.p
             variants={itemVariants}
-            className="mt-[18px] text-sm sm:text-base md:text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto font-normal leading-[1.6]"
+            className="mt-6 sm:mt-7 text-[16px] sm:text-[18px] text-[#6E6E73] dark:text-[#86868B] max-w-2xl mx-auto font-normal leading-[1.6]"
           >
-            I specialize in <strong className="text-zinc-900 dark:text-white font-semibold">Power BI, SQL, Python, and ERP systems</strong> (Workday & CargoWise) to eliminate reporting bottlenecks, track operational KPIs, and translate high-volume transactional records into executive decisions.
+            I specialize in <strong className="text-[#1D1D1F] dark:text-[#F5F5F7] font-semibold">Power BI, SQL, Python, and ERP systems</strong> (Workday & CargoWise) to eliminate reporting bottlenecks, track operational KPIs, and translate high-volume transactional records into executive decisions.
           </motion.p>
 
-          {/* 5. Primary Action Buttons: Stacked full-width touch buttons on mobile, inline on desktop */}
+          {/* 5. Primary Action Buttons */}
           <motion.div
             variants={itemVariants}
-            className="mt-[22px] flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto max-w-xs sm:max-w-none"
+            className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto max-w-xs sm:max-w-none"
           >
             <a
               href="#projects"
-              className="h-12 px-6 rounded-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-sky-600 dark:hover:bg-sky-400 dark:hover:text-zinc-950 active:scale-[0.98] transition-all duration-200 shadow-md flex items-center justify-center gap-2 select-none"
+              className="apple-btn-primary"
             >
               <span>Explore Projects</span>
               <ArrowRight className="w-4 h-4" />
@@ -102,64 +172,64 @@ export default function Hero() {
 
             <a
               href="#live-dashboard"
-              className="h-12 px-6 rounded-full glass-panel text-zinc-800 dark:text-zinc-200 font-semibold text-xs sm:text-sm hover:border-sky-500/40 hover:bg-black/[0.03] dark:hover:bg-white/[0.06] active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center justify-center gap-2 select-none"
+              className="apple-btn-secondary"
             >
-              <BarChart3 className="w-4 h-4 text-sky-500" />
-              <span>Interactive BI Demo</span>
+              <BarChart3 className="w-4 h-4" />
+              <span>Interactive Simulator</span>
             </a>
 
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-12 px-5 rounded-full glass-panel text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 font-medium text-xs sm:text-sm active:scale-[0.98] transition-all shadow-sm flex items-center justify-center gap-2 select-none"
+              className="apple-btn-tertiary sm:ml-2 justify-center py-2 sm:py-0"
             >
               <Download className="w-4 h-4" />
               <span>Resume PDF</span>
             </a>
           </motion.div>
 
-          {/* 6. Micro Stack Technology Chips: balanced wrapping & compact mobile padding */}
+          {/* 6. Micro Stack Technology Chips */}
           <motion.div
             variants={itemVariants}
-            className="mt-[26px] flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-400 font-mono font-medium"
+            className="mt-6 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-[13px] text-[#6E6E73] dark:text-[#86868B] font-mono font-medium"
           >
-            <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5">Power BI (Advanced DAX)</span>
-            <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5">SQL (CTEs & Window Functions)</span>
-            <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5">Python (Pandas)</span>
-            <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5">PySpark & Databricks</span>
-            <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5">Workday ERP</span>
-            <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5">Claude AI Workflows</span>
+            <span className="px-3 py-1.5 rounded-lg bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-[#1D1D1F] dark:text-[#F5F5F7]">Power BI (Advanced DAX)</span>
+            <span className="px-3 py-1.5 rounded-lg bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-[#1D1D1F] dark:text-[#F5F5F7]">SQL (CTEs & Window Functions)</span>
+            <span className="px-3 py-1.5 rounded-lg bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-[#1D1D1F] dark:text-[#F5F5F7]">Python (Pandas)</span>
+            <span className="px-3 py-1.5 rounded-lg bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-[#1D1D1F] dark:text-[#F5F5F7]">PySpark & Databricks</span>
+            <span className="px-3 py-1.5 rounded-lg bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-[#1D1D1F] dark:text-[#F5F5F7]">Workday ERP</span>
+            <span className="px-3 py-1.5 rounded-lg bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-[#1D1D1F] dark:text-[#F5F5F7]">Claude AI Workflows</span>
           </motion.div>
 
         </motion.div>
 
-        {/* 7. Bento Grid Key Metrics Cards: equal-height, aligned numbers, balanced spacing & hover effects */}
+        {/* 7. Bento Grid Key Metrics Cards: Apple Minimal flat cards */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.45, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 sm:mt-12 grid grid-cols-1 min-[380px]:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 max-w-4xl mx-auto w-full items-stretch"
         >
           {keyMetrics.map((metric, idx) => (
             <div
               key={idx}
-              className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left relative overflow-hidden group shadow-sm bg-white dark:bg-[#121217]/70 border border-zinc-200/80 dark:border-white/10 flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/5 dark:hover:shadow-sky-500/10 hover:border-sky-500/30"
+              className="apple-card apple-card-hover text-left flex flex-col justify-between h-full"
             >
               <div>
-                {/* Metric Number: tabular-nums with fixed baseline container */}
+                {/* Metric Number */}
                 <div className="min-h-[36px] sm:min-h-[40px] flex items-baseline mb-2">
-                  <span className={`text-3xl sm:text-4xl font-extrabold tracking-tight tabular-nums bg-gradient-to-r ${metric.color} bg-clip-text text-transparent`}>
-                    {metric.value}
+                  <span className="text-3xl sm:text-4xl font-bold tracking-tight tabular-nums text-[#1D1D1F] dark:text-[#F5F5F7]">
+                    <AnimatedCounter value={metric.value} delay={0.25 + idx * 0.08} />
                   </span>
                 </div>
                 {/* Metric Heading */}
-                <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 tracking-tight leading-snug">
+                <h3 className="text-xs sm:text-sm font-semibold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight leading-snug">
                   {metric.label}
                 </h3>
               </div>
               {/* Metric Description */}
-              <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
+              <p className="text-xs text-[#6E6E73] dark:text-[#86868B] mt-2 leading-relaxed">
                 {metric.desc}
               </p>
             </div>

@@ -128,8 +128,8 @@ export default function Navbar({ theme, setTheme }) {
       <nav
         className={`pointer-events-auto w-full max-w-[1200px] rounded-full transition-all duration-300 flex items-center justify-between px-3.5 sm:px-6 ${
           scrolled
-            ? 'h-[60px] sm:h-[64px] bg-white/80 dark:bg-[#101014]/80 backdrop-blur-2xl border border-black/[0.08] dark:border-white/[0.12] shadow-[0_12px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.55)]'
-            : 'h-[66px] sm:h-[68px] bg-white/70 dark:bg-[#121217]/70 backdrop-blur-xl border border-black/[0.05] dark:border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
+            ? 'h-[58px] sm:h-[62px] bg-white/80 dark:bg-black/80 backdrop-blur-2xl border border-[#E5E7EB] dark:border-[#2C2C2E] shadow-apple-card'
+            : 'h-[64px] sm:h-[66px] bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-[#E5E7EB]/80 dark:border-[#2C2C2E]/80 shadow-apple-subtle'
         }`}
       >
         {/* Left: PK Avatar Monogram & Branding */}
@@ -148,25 +148,25 @@ export default function Navbar({ theme, setTheme }) {
           className="flex items-center gap-2.5 sm:gap-3 group shrink-0"
         >
           <div className="relative">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-600 shadow-md shadow-sky-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-200 select-none">
-              <span className="text-white font-extrabold text-xs sm:text-sm tracking-tight relative z-10">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0071E3] flex items-center justify-center group-hover:scale-105 transition-transform duration-200 select-none shadow-none">
+              <span className="text-white font-bold text-xs tracking-tight relative z-10">
                 PK
               </span>
             </div>
           </div>
 
           <div className="flex flex-col text-left">
-            <span className="font-bold text-sm sm:text-[15.5px] tracking-tight text-zinc-950 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+            <span className="font-semibold text-sm sm:text-[15px] tracking-tight text-[#1D1D1F] dark:text-[#F5F5F7] group-hover:text-[#0071E3] dark:group-hover:text-[#2997FF] transition-colors">
               Pooja Kale
             </span>
-            <span className="text-xs text-zinc-500 dark:text-zinc-400 font-mono hidden xs:inline tracking-tight">
+            <span className="text-xs text-[#6E6E73] dark:text-[#86868B] font-mono hidden xs:inline tracking-tight">
               Data & Business Analyst
             </span>
           </div>
         </a>
 
         {/* Center: Desktop Nav Links with Sliding Active Pill */}
-        <div className="hidden lg:flex items-center gap-0.5 bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.05] rounded-full p-1 relative">
+        <div className="hidden lg:flex items-center gap-0.5 bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] rounded-full p-1 relative">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -174,17 +174,17 @@ export default function Navbar({ theme, setTheme }) {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                className={`relative px-3 xl:px-3.5 py-1.5 rounded-full text-[13.5px] tracking-[-0.01em] whitespace-nowrap transition-colors duration-200 z-10 ${
+                className={`relative px-3 xl:px-3.5 py-1.5 rounded-full text-[13px] tracking-[-0.01em] whitespace-nowrap transition-colors duration-200 z-10 ${
                   isActive
-                    ? 'text-zinc-950 dark:text-white font-semibold'
-                    : 'text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white font-medium'
+                    ? 'text-[#0071E3] dark:text-[#2997FF] font-semibold'
+                    : 'text-[#1D1D1F] dark:text-[#F5F5F7] hover:text-[#0071E3] dark:hover:text-[#2997FF] font-normal'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeNavPill"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    className="absolute inset-0 rounded-full bg-white dark:bg-white/10 shadow-xs border border-black/[0.04] dark:border-white/10 -z-10"
+                    className="absolute inset-0 rounded-full bg-white dark:bg-[#2C2C2E] shadow-apple-subtle border border-[#E5E7EB] dark:border-[#38383A] -z-10"
                   />
                 )}
                 {link.name}
@@ -199,7 +199,7 @@ export default function Navbar({ theme, setTheme }) {
           {/* Animated Theme Toggle: Min 44x44px touch target */}
           <button
             onClick={toggleTheme}
-            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
             aria-label="Toggle Theme"
           >
@@ -226,16 +226,16 @@ export default function Navbar({ theme, setTheme }) {
             <span>1 Month Notice</span>
           </div>
 
-          {/* Resume CTA Button: Hidden on mobile (<640px) to prevent cramped top bar, accessible in drawer */}
+          {/* Resume CTA Button: Apple Minimal button-primary */}
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 px-3.5 sm:px-4 py-2 rounded-full hover:bg-sky-600 dark:hover:bg-sky-400 dark:hover:text-zinc-950 active:scale-[0.98] transition-all duration-200 shadow-xs whitespace-nowrap tracking-tight"
+            className="hidden sm:flex items-center gap-1.5 text-xs sm:text-[13px] font-medium bg-[#0071E3] hover:bg-[#2997FF] active:bg-[#0066CC] text-white px-4 py-2 rounded-full active:scale-[0.98] transition-colors whitespace-nowrap tracking-tight"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Resume</span>
-            <ArrowUpRight className="w-3 h-3 -ml-0.5 opacity-70" />
+            <ArrowUpRight className="w-3 h-3 -ml-0.5 opacity-80" />
           </a>
 
           {/* Mobile Menu Hamburger Button: Min 44x44px touch target */}
@@ -268,21 +268,21 @@ export default function Navbar({ theme, setTheme }) {
               aria-hidden="true"
             />
 
-            {/* Slide-Down Glass Drawer */}
+            {/* Slide-Down Apple Drawer */}
             <motion.div
               initial={{ opacity: 0, y: -12, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="pointer-events-auto absolute top-20 sm:top-24 left-3 right-3 max-w-lg mx-auto rounded-3xl glass-panel bg-white/95 dark:bg-[#101014]/95 backdrop-blur-2xl p-4 sm:p-5 lg:hidden border border-zinc-200 dark:border-white/10 shadow-2xl space-y-4 max-h-[82vh] overflow-y-auto"
+              className="pointer-events-auto absolute top-20 sm:top-24 left-3 right-3 max-w-lg mx-auto rounded-2xl bg-white/95 dark:bg-[#161617]/95 backdrop-blur-2xl p-4 sm:p-5 lg:hidden border border-[#E5E7EB] dark:border-[#2C2C2E] shadow-apple-dropdown space-y-4 max-h-[82vh] overflow-y-auto"
             >
               {/* Status in mobile drawer */}
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-white/5">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB] dark:border-[#2C2C2E]">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-700 dark:text-emerald-400">
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
                   <span>Available on 1 Month Notice</span>
                 </div>
-                <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400">Pune, India</span>
+                <span className="text-xs font-mono font-medium text-[#6E6E73] dark:text-[#86868B]">Pune, India</span>
               </div>
 
               {/* Nav list with min 44px touch targets */}
@@ -294,29 +294,29 @@ export default function Navbar({ theme, setTheme }) {
                       key={link.name}
                       href={link.href}
                       onClick={(e) => scrollToSection(e, link.href)}
-                      className={`flex items-center justify-between text-sm font-medium px-4 py-3 rounded-2xl min-h-[44px] transition-colors ${
+                      className={`flex items-center justify-between text-sm px-4 py-3 rounded-xl min-h-[44px] transition-colors ${
                         isActive
-                          ? 'bg-sky-500/10 text-sky-600 dark:text-sky-400 font-semibold'
-                          : 'text-zinc-700 dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/5'
+                          ? 'bg-[#0071E3]/10 text-[#0071E3] dark:text-[#2997FF] font-semibold'
+                          : 'text-[#1D1D1F] dark:text-[#F5F5F7] hover:bg-[#F5F5F7] dark:hover:bg-[#1D1D1F] font-normal'
                       }`}
                     >
                       <span>{link.name}</span>
-                      {isActive && <div className="w-1.5 h-1.5 rounded-full bg-sky-500" />}
+                      {isActive && <div className="w-1.5 h-1.5 rounded-full bg-[#0071E3] dark:bg-[#2997FF]" />}
                     </a>
                   );
                 })}
               </div>
 
-              {/* Mobile Resume CTA: Full-width, high-visibility 48px touch button */}
+              {/* Mobile Resume CTA: Apple Minimal button-primary */}
               <a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full min-h-[48px] py-3 text-xs sm:text-sm font-semibold bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 rounded-2xl shadow-md hover:bg-sky-600 dark:hover:bg-sky-400 active:scale-[0.98] transition-all"
+                className="flex items-center justify-center gap-2 w-full min-h-[48px] py-3 text-sm font-medium bg-[#0071E3] hover:bg-[#2997FF] active:bg-[#0066CC] text-white rounded-full transition-colors"
               >
                 <FileText className="w-4 h-4" />
                 <span>Download Resume PDF</span>
-                <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
+                <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
               </a>
             </motion.div>
           </>

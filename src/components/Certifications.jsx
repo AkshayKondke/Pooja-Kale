@@ -19,6 +19,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { certificationsData, achievementsData } from '../data/portfolioData';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function Certifications() {
   const [activeTab, setActiveTab] = useState('all');
@@ -46,30 +47,27 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="py-16 sm:py-20 scroll-mt-24 sm:scroll-mt-28 relative overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-sky-500/5 via-indigo-500/5 to-emerald-500/5 blur-[140px] pointer-events-none -z-10" />
-
+    <section id="certifications" className="py-16 sm:py-20 scroll-mt-24 sm:scroll-mt-28 relative overflow-hidden bg-white dark:bg-black transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-semibold text-sky-600 dark:text-sky-400 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0071E3]/10 border border-[#0071E3]/20 text-xs font-semibold text-[#0071E3] dark:text-[#2997FF]">
             <Award className="w-3.5 h-3.5" />
             <span>Credentials & Impact</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 dark:text-white leading-[1.15]">
-            Certifications & <span className="text-gradient-blue">Achievements</span>.
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1D1D1F] dark:text-white leading-[1.15]">
+            Certifications & <span className="text-[#0071E3] dark:text-[#2997FF]">Achievements</span>.
           </h2>
 
-          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#6E6E73] dark:text-[#86868B] font-normal leading-relaxed max-w-2xl mx-auto">
             Industry-recognized data certifications, proven enterprise reconciliation milestones, and academic research honors validating technical and business impact.
           </p>
 
           {/* Apple-style Segmented Control / Tabs */}
           <div className="pt-4 flex justify-center">
-            <div className="inline-flex p-1.5 rounded-2xl glass-panel bg-black/[0.03] dark:bg-white/[0.04] border border-black/5 dark:border-white/10 max-w-full overflow-x-auto no-scrollbar gap-1 shadow-sm">
+            <div className="inline-flex p-1 rounded-full bg-[#F5F5F7] dark:bg-[#1C1C1E] border border-[#E5E7EB] dark:border-[#2C2C2E] max-w-full overflow-x-auto no-scrollbar gap-1">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
@@ -77,26 +75,26 @@ export default function Certifications() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors duration-200 whitespace-nowrap cursor-pointer ${
+                    className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-200 whitespace-nowrap cursor-pointer ${
                       isActive
-                        ? 'text-zinc-950 dark:text-white'
-                        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                        ? 'text-[#1D1D1F] dark:text-white'
+                        : 'text-[#6E6E73] dark:text-[#86868B] hover:text-[#1D1D1F] dark:hover:text-white'
                     }`}
                   >
                     {isActive && (
                       <motion.div
                         layoutId="activeCertTab"
-                        className="absolute inset-0 bg-white dark:bg-[#1c1c22] rounded-xl shadow-sm border border-black/5 dark:border-white/10"
+                        className="absolute inset-0 bg-white dark:bg-[#2C2C2E] rounded-full shadow-sm border border-[#E5E7EB] dark:border-[#3A3A3C]"
                         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                       />
                     )}
                     <span className="relative z-10 flex items-center gap-1.5">
-                      <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-sky-500' : 'text-zinc-400 dark:text-zinc-500'}`} />
+                      <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#0071E3] dark:text-[#2997FF]' : 'text-[#6E6E73] dark:text-[#86868B]'}`} />
                       <span>{tab.label}</span>
                       <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
                         isActive
-                          ? 'bg-sky-500/15 text-sky-600 dark:text-sky-400 font-bold'
-                          : 'bg-zinc-200/60 dark:bg-white/10 text-zinc-500 dark:text-zinc-400'
+                          ? 'bg-[#0071E3]/15 text-[#0071E3] dark:text-[#2997FF] font-bold'
+                          : 'bg-[#E5E7EB] dark:bg-white/10 text-[#6E6E73] dark:text-[#86868B]'
                       }`}>
                         {tab.count}
                       </span>
@@ -108,7 +106,7 @@ export default function Certifications() {
           </div>
         </div>
 
-        {/* Top 4 KPI Metric Pills: Responsive grid & padding */}
+        {/* Top 4 KPI Metric Pills: Apple Minimal Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12 sm:mb-16">
           {keyStats.map((stat, idx) => {
             const StatIcon = stat.icon;
@@ -119,20 +117,20 @@ export default function Certifications() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: idx * 0.08 }}
-                className="glass-panel rounded-2xl p-3.5 sm:p-5 border-zinc-200/80 dark:border-white/10 bg-white/70 dark:bg-[#121217]/60 shadow-sm space-y-1.5"
+                className="apple-card rounded-2xl p-4 sm:p-5 space-y-1.5"
               >
                 <div className="flex items-center justify-between">
-                  <span className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${stat.color}`}>
-                    {stat.value}
+                  <span className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0071E3] dark:text-[#2997FF]">
+                    <AnimatedCounter value={stat.value} delay={idx * 0.08} />
                   </span>
-                  <div className="p-1.5 sm:p-2 rounded-xl bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400">
+                  <div className="p-1.5 sm:p-2 rounded-xl bg-[#F5F5F7] dark:bg-[#1C1C1E] text-[#6E6E73] dark:text-[#86868B] border border-[#E5E7EB] dark:border-[#2C2C2E]">
                     <StatIcon className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                   </div>
                 </div>
-                <div className="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white">
+                <div className="font-bold text-xs sm:text-sm text-[#1D1D1F] dark:text-white">
                   {stat.label}
                 </div>
-                <p className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400 leading-snug">
+                <p className="text-[10px] sm:text-[11px] text-[#6E6E73] dark:text-[#86868B] leading-snug">
                   {stat.desc}
                 </p>
               </motion.div>
@@ -155,16 +153,16 @@ export default function Certifications() {
             >
               {/* Section 1: Major Honors & Accomplishments */}
               <div className="space-y-6">
-                <div className="flex items-center justify-between border-b border-zinc-200/60 dark:border-white/10 pb-3">
+                <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#2C2C2E] pb-3">
                   <div className="flex items-center gap-2">
                     <Trophy className="w-4 h-4 text-emerald-500" />
-                    <h3 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] dark:text-white tracking-tight">
                       Featured Honors & Recognitions
                     </h3>
                   </div>
                   <button
                     onClick={() => setActiveTab('achievements')}
-                    className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-semibold text-[#0071E3] dark:text-[#2997FF] hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     <span>View all honors</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -175,38 +173,38 @@ export default function Certifications() {
                   {achievementsData.slice(0, 2).map((item) => (
                     <motion.div
                       key={item.id}
-                      whileHover={{ y: -3 }}
-                      className="glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm hover:border-emerald-500/30 transition-all flex flex-col justify-between"
+                      whileHover={{ y: -2 }}
+                      className="apple-card rounded-2xl p-6 sm:p-7 space-y-4 flex flex-col justify-between"
                     >
                       <div className="space-y-3">
                         <div className="flex flex-wrap items-center justify-between gap-2">
-                          <span className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gradient-blue">
+                          <span className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0071E3] dark:text-[#2997FF]">
                             {item.metric}
                           </span>
-                          <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                          <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
                             {item.highlight}
                           </span>
                         </div>
 
                         <div>
-                          <h4 className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
+                          <h4 className="text-lg font-bold text-[#1D1D1F] dark:text-white tracking-tight">
                             {item.title}
                           </h4>
-                          <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
+                          <span className="text-xs text-[#6E6E73] dark:text-[#86868B] font-medium">
                             {item.organization} • {item.date}
                           </span>
                         </div>
 
-                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-[#6E6E73] dark:text-zinc-300 leading-relaxed">
                           {item.desc}
                         </p>
                       </div>
 
-                      <div className="pt-3 border-t border-zinc-100 dark:border-white/5 flex flex-wrap gap-1.5">
+                      <div className="pt-3 border-t border-[#E5E7EB] dark:border-[#2C2C2E] flex flex-wrap gap-1.5">
                         {item.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 border border-zinc-200/60 dark:border-white/5"
+                            className="px-2.5 py-0.5 rounded-md text-xs font-medium bg-[#F5F5F7] dark:bg-[#1C1C1E] text-[#6E6E73] dark:text-zinc-300 border border-[#E5E7EB] dark:border-[#2C2C2E]"
                           >
                             {tag}
                           </span>
@@ -219,16 +217,16 @@ export default function Certifications() {
 
               {/* Section 2: Verified Certifications & Courses Grid */}
               <div className="space-y-6">
-                <div className="flex items-center justify-between border-b border-zinc-200/60 dark:border-white/10 pb-3">
+                <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#2C2C2E] pb-3">
                   <div className="flex items-center gap-2">
-                    <Award className="w-4 h-4 text-sky-500" />
-                    <h3 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
+                    <Award className="w-4 h-4 text-[#0071E3]" />
+                    <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] dark:text-white tracking-tight">
                       Industry Certifications & Professional Courses
                     </h3>
                   </div>
                   <button
                     onClick={() => setActiveTab('certifications')}
-                    className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-semibold text-[#0071E3] dark:text-[#2997FF] hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     <span>View all certifications</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -241,47 +239,47 @@ export default function Certifications() {
                     return (
                       <motion.div
                         key={cert.id}
-                        whileHover={{ y: -4 }}
-                        className="glass-panel rounded-3xl p-4 sm:p-6 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm hover:border-sky-500/30 transition-all flex flex-col justify-between"
+                        whileHover={{ y: -2 }}
+                        className="apple-card rounded-2xl p-5 sm:p-6 space-y-4 flex flex-col justify-between"
                       >
                         <div className="space-y-3">
                           {/* Issuer & Verification Pill */}
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400">
+                              <div className="w-8 h-8 rounded-xl bg-[#0071E3]/10 flex items-center justify-center text-[#0071E3] dark:text-[#2997FF]">
                                 <IssuerIcon className="w-4 h-4" />
                               </div>
-                              <span className="text-xs font-semibold text-zinc-900 dark:text-white">
+                              <span className="text-xs font-semibold text-[#1D1D1F] dark:text-white">
                                 {cert.issuer}
                               </span>
                             </div>
 
-                            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
+                            <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-semibold text-emerald-700 dark:text-emerald-400">
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                               <span>{cert.status}</span>
                             </div>
                           </div>
 
                           <div>
-                            <h4 className="text-base font-bold text-zinc-950 dark:text-white tracking-tight leading-snug">
+                            <h4 className="text-base font-bold text-[#1D1D1F] dark:text-white tracking-tight leading-snug">
                               {cert.title}
                             </h4>
-                            <div className="text-[11px] font-mono text-zinc-500 mt-1">
+                            <div className="text-[11px] font-mono text-[#6E6E73] mt-1">
                               {cert.category} • {cert.issueDate}
                             </div>
                           </div>
 
-                          <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                          <p className="text-xs text-[#6E6E73] dark:text-zinc-400 leading-relaxed">
                             {cert.description}
                           </p>
                         </div>
 
-                        <div className="space-y-3 pt-3 border-t border-zinc-100 dark:border-white/5">
+                        <div className="space-y-3 pt-3 border-t border-[#E5E7EB] dark:border-[#2C2C2E]">
                           <div className="flex flex-wrap gap-1">
                             {cert.skillsValidated.map((skill) => (
                               <span
                                 key={skill}
-                                className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-white/5"
+                                className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#F5F5F7] dark:bg-[#1C1C1E] text-[#6E6E73] dark:text-zinc-300 border border-[#E5E7EB] dark:border-[#2C2C2E]"
                               >
                                 {skill}
                               </span>
@@ -289,12 +287,12 @@ export default function Certifications() {
                           </div>
 
                           <div className="pt-1 flex items-center justify-between text-xs">
-                            <span className="text-zinc-400 text-[11px]">Validated Skill Set</span>
+                            <span className="text-[#6E6E73] text-[11px]">Validated Skill Set</span>
                             <a
                               href={cert.credentialUrl}
                               target={cert.credentialUrl.startsWith('http') ? '_blank' : '_self'}
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 font-semibold text-sky-600 dark:text-sky-400 hover:underline text-xs"
+                              className="inline-flex items-center gap-1 font-semibold text-[#0071E3] dark:text-[#2997FF] hover:underline text-xs cursor-pointer"
                             >
                               <span>View Details</span>
                               <ArrowUpRight className="w-3 h-3" />
@@ -320,10 +318,10 @@ export default function Certifications() {
               className="space-y-8"
             >
               <div className="text-center space-y-2 mb-8 max-w-xl mx-auto">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F] dark:text-white tracking-tight">
                   Verified Industry Certifications & Specialized Courses
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-xs sm:text-sm text-[#6E6E73] dark:text-[#86868B]">
                   Demonstrated command over data architecture, analytics tooling, distributed processing, and enterprise systems.
                 </p>
               </div>
@@ -338,54 +336,54 @@ export default function Certifications() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: idx * 0.06 }}
-                      whileHover={{ y: -4 }}
-                      className="glass-panel rounded-3xl p-6 sm:p-7 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm hover:border-sky-500/30 transition-all flex flex-col justify-between"
+                      whileHover={{ y: -2 }}
+                      className="apple-card rounded-2xl p-6 sm:p-7 space-y-4 flex flex-col justify-between"
                     >
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <div className="w-9 h-9 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400">
+                            <div className="w-9 h-9 rounded-xl bg-[#0071E3]/10 flex items-center justify-center text-[#0071E3] dark:text-[#2997FF]">
                               <IssuerIcon className="w-4 h-4" />
                             </div>
                             <div>
-                              <div className="text-xs font-bold text-zinc-900 dark:text-white">
+                              <div className="text-xs font-bold text-[#1D1D1F] dark:text-white">
                                 {cert.issuer}
                               </div>
-                              <div className="text-[10px] font-mono text-zinc-500">
+                              <div className="text-[10px] font-mono text-[#6E6E73]">
                                 Issued {cert.issueDate}
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-bold text-emerald-700 dark:text-emerald-400">
                             <CheckCircle2 className="w-3 h-3 text-emerald-500" />
                             <span>{cert.status}</span>
                           </div>
                         </div>
 
                         <div>
-                          <h4 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight leading-snug">
+                          <h4 className="text-base sm:text-lg font-bold text-[#1D1D1F] dark:text-white tracking-tight leading-snug">
                             {cert.title}
                           </h4>
-                          <span className="inline-block mt-1 text-[11px] font-semibold text-sky-600 dark:text-sky-400">
+                          <span className="inline-block mt-1 text-[11px] font-semibold text-[#0071E3] dark:text-[#2997FF]">
                             {cert.category}
                           </span>
                         </div>
 
-                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-[#6E6E73] dark:text-zinc-300 leading-relaxed">
                           {cert.description}
                         </p>
                       </div>
 
-                      <div className="space-y-3 pt-3 border-t border-zinc-100 dark:border-white/5">
-                        <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400">
+                      <div className="space-y-3 pt-3 border-t border-[#E5E7EB] dark:border-[#2C2C2E]">
+                        <div className="text-[11px] font-mono uppercase tracking-wider text-[#6E6E73]">
                           Core Competencies Validated:
                         </div>
                         <div className="flex flex-wrap gap-1.5">
                           {cert.skillsValidated.map((skill) => (
                             <span
                               key={skill}
-                              className="px-2 py-0.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-white/5"
+                              className="px-2.5 py-0.5 rounded-lg text-xs font-medium bg-[#F5F5F7] dark:bg-[#1C1C1E] text-[#6E6E73] dark:text-zinc-300 border border-[#E5E7EB] dark:border-[#2C2C2E]"
                             >
                               {skill}
                             </span>
@@ -397,7 +395,7 @@ export default function Certifications() {
                             href={cert.credentialUrl}
                             target={cert.credentialUrl.startsWith('http') ? '_blank' : '_self'}
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline"
+                            className="inline-flex items-center gap-1 text-xs font-semibold text-[#0071E3] dark:text-[#2997FF] hover:underline cursor-pointer"
                           >
                             <span>Verify Credential</span>
                             <ArrowUpRight className="w-3 h-3" />
@@ -412,7 +410,7 @@ export default function Certifications() {
               <div className="text-center pt-4">
                 <button
                   onClick={() => setActiveTab('all')}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0071E3] dark:text-[#2997FF] hover:underline cursor-pointer"
                 >
                   <span>Return to All Credentials</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -432,10 +430,10 @@ export default function Certifications() {
               className="space-y-8 max-w-5xl mx-auto"
             >
               <div className="text-center space-y-2 mb-8 max-w-xl mx-auto">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F] dark:text-white tracking-tight">
                   Enterprise Impact & Academic Milestones
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-xs sm:text-sm text-[#6E6E73] dark:text-[#86868B]">
                   Real-world measurable accomplishments across enterprise systems, operations optimization, and academic research.
                 </p>
               </div>
@@ -448,38 +446,38 @@ export default function Certifications() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: idx * 0.1 }}
-                    whileHover={{ y: -4 }}
-                    className="glass-panel rounded-3xl p-6 sm:p-8 border-zinc-200/80 dark:border-white/10 bg-white/80 dark:bg-[#121217]/70 space-y-4 shadow-sm hover:border-emerald-500/30 transition-all flex flex-col justify-between"
+                    whileHover={{ y: -2 }}
+                    className="apple-card rounded-2xl p-6 sm:p-8 space-y-4 flex flex-col justify-between"
                   >
                     <div className="space-y-3">
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gradient-blue">
+                        <span className="text-3xl sm:text-4xl font-bold tracking-tight text-[#0071E3] dark:text-[#2997FF]">
                           {item.metric}
                         </span>
-                        <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                        <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
                           {item.highlight}
                         </span>
                       </div>
 
                       <div>
-                        <h4 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
+                        <h4 className="text-lg sm:text-xl font-bold text-[#1D1D1F] dark:text-white tracking-tight">
                           {item.title}
                         </h4>
-                        <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium">
+                        <div className="text-xs text-[#6E6E73] dark:text-[#86868B] mt-1 font-medium">
                           {item.organization} • {item.date}
                         </div>
                       </div>
 
-                      <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-[#6E6E73] dark:text-zinc-300 leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-zinc-100 dark:border-white/5 flex flex-wrap gap-1.5">
+                    <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#2C2C2E] flex flex-wrap gap-1.5">
                       {item.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2.5 py-1 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-white/5"
+                          className="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#F5F5F7] dark:bg-[#1C1C1E] text-[#6E6E73] dark:text-zinc-300 border border-[#E5E7EB] dark:border-[#2C2C2E]"
                         >
                           {tag}
                         </span>
@@ -490,17 +488,17 @@ export default function Certifications() {
               </div>
 
               {/* Recruitment Value Callout */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-emerald-500/10 border border-sky-500/20 text-center space-y-3">
-                <h4 className="text-xl font-bold text-zinc-950 dark:text-white">
+              <div className="p-6 sm:p-8 rounded-2xl bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-center space-y-3">
+                <h4 className="text-xl font-bold text-[#1D1D1F] dark:text-white">
                   Proven Track Record of Measurable Execution
                 </h4>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 max-w-lg mx-auto">
+                <p className="text-xs sm:text-sm text-[#6E6E73] dark:text-zinc-300 max-w-lg mx-auto">
                   Available on 1-month notice. Ready to apply certified data modeling, query optimization, and enterprise reconciliation to your team.
                 </p>
                 <div className="pt-2 flex justify-center">
                   <a
                     href="#contact"
-                    className="px-6 py-2.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 text-xs sm:text-sm font-semibold hover:bg-sky-600 dark:hover:bg-sky-400 transition-colors shadow-sm"
+                    className="apple-btn-primary min-h-[44px] px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold"
                   >
                     Discuss Open Opportunities
                   </a>
@@ -510,7 +508,7 @@ export default function Certifications() {
               <div className="text-center pt-2">
                 <button
                   onClick={() => setActiveTab('all')}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0071E3] dark:text-[#2997FF] hover:underline cursor-pointer"
                 >
                   <span>Return to All Credentials</span>
                   <ChevronRight className="w-3.5 h-3.5" />

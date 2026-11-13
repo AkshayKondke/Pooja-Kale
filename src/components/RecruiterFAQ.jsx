@@ -38,19 +38,19 @@ export default function RecruiterFAQ() {
   ];
 
   return (
-    <section id="faq" className="py-16 sm:py-20 scroll-mt-24 sm:scroll-mt-28 relative">
+    <section id="faq" className="py-16 sm:py-20 scroll-mt-24 sm:scroll-mt-28 relative bg-[#F5F5F7] dark:bg-[#121214] border-y border-[#E5E7EB] dark:border-[#2C2C2E] transition-colors">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-semibold text-sky-600 dark:text-sky-400">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0071E3]/10 border border-[#0071E3]/20 text-xs font-semibold text-[#0071E3] dark:text-[#2997FF]">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Recruiter Fast-Facts</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950 dark:text-white">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F] dark:text-white">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+          <p className="text-sm sm:text-base text-[#6E6E73] dark:text-[#86868B]">
             Quick, high-signal answers to key questions for talent partners and hiring managers.
           </p>
         </div>
@@ -66,32 +66,32 @@ export default function RecruiterFAQ() {
             return (
               <div
                 key={index}
-                className="glass-panel rounded-2xl border-zinc-200/80 dark:border-white/10 overflow-hidden transition-all duration-200 bg-white dark:bg-[#121217]/60 shadow-sm"
+                className="apple-card rounded-2xl overflow-hidden transition-all duration-200"
               >
                 <button
                   id={buttonId}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                  className="w-full p-4 sm:p-6 text-left flex items-center justify-between gap-3 sm:gap-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-2xl min-h-[52px] cursor-pointer"
+                  className="w-full p-4 sm:p-6 text-left flex items-center justify-between gap-3 sm:gap-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0071E3] rounded-2xl min-h-[52px] cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#0071E3]/10 text-[#0071E3] dark:text-[#2997FF] flex items-center justify-center shrink-0">
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
+                      <span className="text-xs font-mono uppercase tracking-wider text-[#0071E3] dark:text-[#2997FF] font-bold block mb-1">
                         {faq.tag}
                       </span>
-                      <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white">
+                      <h3 className="text-sm sm:text-base font-bold text-[#1D1D1F] dark:text-white">
                         {faq.question}
                       </h3>
                     </div>
                   </div>
                   <ChevronDown
                     aria-hidden="true"
-                    className={`w-5 h-5 text-zinc-400 transition-transform duration-200 shrink-0 ${
-                      isOpen ? 'rotate-180 text-sky-500' : ''
+                    className={`w-5 h-5 text-[#6E6E73] transition-transform duration-200 shrink-0 ${
+                      isOpen ? 'rotate-180 text-[#0071E3]' : ''
                     }`}
                   />
                 </button>
@@ -101,7 +101,7 @@ export default function RecruiterFAQ() {
                     id={panelId}
                     role="region"
                     aria-labelledby={buttonId}
-                    className="px-4 pb-4 sm:px-6 sm:pb-6 pt-0 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed border-t border-zinc-100 dark:border-white/5 animate-in fade-in duration-200"
+                    className="px-4 pb-4 sm:px-6 sm:pb-6 pt-0 text-xs sm:text-sm text-[#6E6E73] dark:text-zinc-300 leading-relaxed border-t border-[#E5E7EB] dark:border-[#2C2C2E] animate-in fade-in duration-200"
                   >
                     <p className="mt-3">{faq.answer}</p>
                   </div>

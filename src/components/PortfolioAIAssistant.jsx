@@ -95,11 +95,11 @@ Feel free to send a message via the Contact section below or email directly!`;
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
       
-      {/* Refined Floating Trigger Button */}
+      {/* Refined Floating Trigger Button: Apple Minimal Pill */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="h-10 px-3.5 sm:px-4 rounded-full bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-600 text-white font-semibold text-xs shadow-md shadow-sky-500/20 hover:shadow-lg hover:shadow-sky-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 select-none border border-white/20 backdrop-blur-sm group"
+          className="h-11 px-4 rounded-full bg-[#0071E3] hover:bg-[#2997FF] active:bg-[#0066CC] text-white font-semibold text-xs shadow-md transition-all flex items-center gap-2 select-none cursor-pointer group"
           title="Open Portfolio AI Assistant"
         >
           <div className="relative flex items-center justify-center">
@@ -112,26 +112,26 @@ Feel free to send a message via the Contact section below or email directly!`;
 
       {/* Chat Window Drawer */}
       {isOpen && (
-        <div className="w-[calc(100vw-32px)] sm:w-[360px] max-w-[360px] h-[490px] max-h-[80vh] rounded-3xl glass-panel bg-white/95 dark:bg-[#121217]/95 border-zinc-200 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+        <div className="w-[calc(100vw-32px)] sm:w-[360px] max-w-[360px] h-[490px] max-h-[80vh] rounded-[24px] apple-card bg-white/95 dark:bg-[#161617]/95 border-[#E5E7EB] dark:border-[#2C2C2E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
           
           {/* Header */}
-          <div className="p-3.5 bg-zinc-100 dark:bg-white/[0.04] border-b border-zinc-200 dark:border-white/5 flex items-center justify-between">
+          <div className="p-3.5 bg-[#F5F5F7] dark:bg-[#121214] border-b border-[#E5E7EB] dark:border-[#2C2C2E] flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-600 flex items-center justify-center text-white">
+              <div className="w-7 h-7 rounded-full bg-[#0071E3] flex items-center justify-center text-white">
                 <Bot className="w-3.5 h-3.5" />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+                <h4 className="text-xs font-bold text-[#1D1D1F] dark:text-white flex items-center gap-1.5">
                   <span>Portfolio AI Assistant</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 </h4>
-                <span className="text-[10px] text-zinc-500 font-mono">Pooja Kale Knowledge Base</span>
+                <span className="text-[10px] text-[#6E6E73] dark:text-[#86868B] font-mono">Pooja Kale Knowledge Base</span>
               </div>
             </div>
 
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1.5 rounded-full text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              className="p-1.5 rounded-full text-[#6E6E73] hover:text-[#1D1D1F] dark:text-[#86868B] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -147,8 +147,8 @@ Feel free to send a message via the Contact section below or email directly!`;
                 <div
                   className={`max-w-[85%] rounded-2xl p-3 leading-relaxed whitespace-pre-line ${
                     msg.role === 'user'
-                      ? 'bg-sky-500 text-white font-medium rounded-br-none shadow-sm'
-                      : 'bg-zinc-100 dark:bg-white/[0.05] text-zinc-800 dark:text-zinc-200 rounded-bl-none border border-zinc-200/50 dark:border-white/5'
+                      ? 'bg-[#0071E3] text-white font-medium rounded-br-none shadow-sm'
+                      : 'bg-[#F5F5F7] dark:bg-[#1C1C1E] text-[#1D1D1F] dark:text-zinc-200 rounded-bl-none border border-[#E5E7EB] dark:border-[#2C2C2E]'
                   }`}
                 >
                   {msg.text}
@@ -159,12 +159,12 @@ Feel free to send a message via the Contact section below or email directly!`;
           </div>
 
           {/* Suggested Prompt Chips */}
-          <div className="px-3 py-2 border-t border-zinc-100 dark:border-white/5 flex flex-wrap gap-1.5 bg-zinc-50 dark:bg-white/[0.01]">
+          <div className="px-3 py-2 border-t border-[#E5E7EB] dark:border-[#2C2C2E] flex flex-wrap gap-1.5 bg-[#F5F5F7] dark:bg-[#121214]">
             {suggestedPrompts.map((prompt, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSend(prompt)}
-                className="text-[10px] px-2.5 py-1 rounded-full bg-zinc-200/80 dark:bg-white/5 hover:bg-sky-500 hover:text-white dark:hover:bg-sky-500 dark:hover:text-white text-zinc-700 dark:text-zinc-300 transition-colors border border-zinc-200 dark:border-white/5"
+                className="text-[10px] px-2.5 py-1 rounded-full bg-white dark:bg-[#1C1C1E] hover:border-[#0071E3] hover:text-[#0071E3] dark:hover:border-[#2997FF] dark:hover:text-[#2997FF] text-[#6E6E73] dark:text-[#86868B] transition-colors border border-[#E5E7EB] dark:border-[#2C2C2E] cursor-pointer"
               >
                 {prompt}
               </button>
@@ -177,19 +177,19 @@ Feel free to send a message via the Contact section below or email directly!`;
               e.preventDefault();
               handleSend();
             }}
-            className="p-3 bg-zinc-100 dark:bg-white/[0.04] border-t border-zinc-200 dark:border-white/5 flex items-center gap-2"
+            className="p-3 bg-[#F5F5F7] dark:bg-[#121214] border-t border-[#E5E7EB] dark:border-[#2C2C2E] flex items-center gap-2"
           >
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask anything about Pooja..."
-              className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-black/40 border border-zinc-200 dark:border-white/10 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-sky-500 transition-colors"
+              className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-[#1C1C1E] border border-[#E5E7EB] dark:border-[#2C2C2E] text-xs text-[#1D1D1F] dark:text-white placeholder-[#86868B] focus:outline-none focus:border-[#0071E3] transition-colors"
             />
             <button
               type="submit"
               disabled={!input.trim()}
-              className="p-2 rounded-xl bg-sky-500 text-white hover:bg-sky-600 disabled:opacity-40 transition-all shadow-sm"
+              className="p-2 rounded-full bg-[#0071E3] text-white hover:bg-[#2997FF] disabled:opacity-40 transition-all shadow-sm cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
             </button>

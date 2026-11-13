@@ -5,6 +5,7 @@ import {
   X, Github, CheckCircle2, AlertTriangle,
   Layers, SlidersHorizontal, Sparkles
 } from 'lucide-react';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function ProjectCaseStudyModal({ project, onClose }) {
   // Close on Escape key and lock background body scroll
@@ -56,13 +57,13 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 12 }}
         transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 w-full max-w-[880px] max-h-[85vh] sm:max-h-[86vh] my-auto flex flex-col bg-white dark:bg-[#121217] rounded-[24px] border border-zinc-200/90 dark:border-white/10 shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-[880px] max-h-[85vh] sm:max-h-[86vh] my-auto flex flex-col bg-white dark:bg-[#161617] rounded-[24px] border border-[#E5E7EB] dark:border-[#2C2C2E] shadow-2xl overflow-hidden"
       >
         
         {/* ========================================================= */}
         {/* LAYER 1: MODAL HEADER (Fixed, Non-Scrolling, Min 44px targets) */}
         {/* ========================================================= */}
-        <div className="shrink-0 px-5 sm:px-7 py-3.5 sm:py-4 bg-white/95 dark:bg-[#121217]/95 backdrop-blur-xl border-b border-zinc-200/90 dark:border-white/10 flex items-center justify-between gap-3 z-20">
+        <div className="shrink-0 px-5 sm:px-7 py-3.5 sm:py-4 bg-white/95 dark:bg-[#161617]/95 backdrop-blur-xl border-b border-[#E5E7EB] dark:border-[#2C2C2E] flex items-center justify-between gap-3 z-20">
           
           {/* Left: macOS Dots + Single Clean Category Badge */}
           <div className="flex items-center gap-3 min-w-0">
@@ -78,7 +79,7 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
             </div>
 
             <div className="flex items-center gap-2 text-xs truncate ml-1">
-              <span className="px-3 py-1 rounded-full text-xs sm:text-[13px] font-semibold bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/20 shrink-0 font-mono">
+              <span className="px-3 py-1 rounded-full text-xs sm:text-[13px] font-semibold bg-[#0071E3]/10 text-[#0071E3] dark:text-[#2997FF] border border-[#0071E3]/20 shrink-0 font-mono">
                 {project.category || project.badge}
               </span>
             </div>
@@ -88,7 +89,7 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={onClose}
-              className="w-10 h-10 min-h-[44px] min-w-[44px] rounded-full flex items-center justify-center text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+              className="w-10 h-10 min-h-[44px] min-w-[44px] rounded-full flex items-center justify-center text-[#6E6E73] hover:text-[#1D1D1F] dark:text-[#86868B] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
               aria-label="Close modal dialog"
             >
               <X className="w-5 h-5" />
@@ -105,22 +106,22 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
           <div className="space-y-1.5">
             <h2
               id="modal-project-title"
-              className="text-xl sm:text-2xl md:text-[26px] font-bold tracking-tight text-zinc-950 dark:text-white leading-[1.2]"
+              className="text-xl sm:text-2xl md:text-[26px] font-bold tracking-tight text-[#1D1D1F] dark:text-white leading-[1.2]"
             >
               {project.title}
             </h2>
-            <p className="text-sm sm:text-[15px] font-medium text-sky-600 dark:text-sky-400">
+            <p className="text-sm sm:text-[15px] font-medium text-[#0071E3] dark:text-[#2997FF]">
               {project.tagline}
             </p>
           </div>
 
-          {/* 2. Executive Summary (Concise Card) */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-sky-500/[0.04] border border-sky-500/20 text-xs sm:text-sm text-zinc-700 dark:text-zinc-200 leading-relaxed space-y-1.5 shadow-xs">
-            <div className="flex items-center gap-1.5 font-mono font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wider text-xs sm:text-[12.5px]">
+          {/* 2. Executive Summary (Concise Apple Minimal Card) */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#F5F5F7] dark:bg-[#121214] border border-[#E5E7EB] dark:border-[#2C2C2E] text-xs sm:text-sm text-[#1D1D1F] dark:text-zinc-200 leading-relaxed space-y-1.5">
+            <div className="flex items-center gap-1.5 font-mono font-bold text-[#0071E3] dark:text-[#2997FF] uppercase tracking-wider text-xs sm:text-[12.5px]">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Executive Brief</span>
             </div>
-            <p className="text-sm sm:text-[15px] text-zinc-700 dark:text-zinc-200 leading-relaxed font-normal">
+            <p className="text-sm sm:text-[15px] text-[#1D1D1F] dark:text-zinc-200 leading-relaxed font-normal">
               {caseStudy.executiveSummary}
             </p>
           </div>
@@ -130,10 +131,10 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
             {project.measurableResults.map((result, idx) => (
               <div
                 key={idx}
-                className="p-4 sm:p-5 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200/80 dark:border-white/5 text-center flex flex-col justify-center items-center shadow-xs min-h-[92px]"
+                className="p-4 sm:p-5 rounded-2xl bg-[#F5F5F7] dark:bg-[#121214] border border-[#E5E7EB] dark:border-[#2C2C2E] text-center flex flex-col justify-center items-center min-h-[92px]"
               >
                 <div className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${result.color}`}>
-                  {result.metric}
+                  <AnimatedCounter value={result.metric} delay={idx * 0.08} />
                 </div>
                 <div className="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300 mt-1">
                   {result.label}
@@ -181,15 +182,15 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
 
           {/* 5. Relevant Technology Stack */}
           <div className="space-y-2.5 pt-1">
-            <div className="flex items-center gap-2 text-xs sm:text-[13px] font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-              <Layers className="w-3.5 h-3.5 text-sky-500" />
+            <div className="flex items-center gap-2 text-xs sm:text-[13px] font-mono font-bold uppercase tracking-wider text-[#6E6E73] dark:text-[#86868B]">
+              <Layers className="w-3.5 h-3.5 text-[#0071E3]" />
               <span>Core Technology Stack</span>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {project.tools.slice(0, 6).map((tool) => (
                 <span
                   key={tool}
-                  className="px-3.5 py-1.5 rounded-xl text-xs sm:text-[13px] font-mono font-medium bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-zinc-800 dark:text-zinc-200"
+                  className="px-3.5 py-1.5 rounded-full text-xs sm:text-[13px] font-mono font-medium bg-[#F5F5F7] dark:bg-[#1C1C1E] border border-[#E5E7EB] dark:border-[#2C2C2E] text-[#1D1D1F] dark:text-zinc-200"
                 >
                   {tool}
                 </span>
@@ -200,7 +201,7 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
           {/* 6. Verified Deliverables & Business Impact */}
           {caseStudy.keyOutcomes && caseStudy.keyOutcomes.length > 0 && (
             <div className="space-y-3 pt-2">
-              <div className="flex items-center gap-2 text-xs sm:text-[13px] font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              <div className="flex items-center gap-2 text-xs sm:text-[13px] font-mono font-bold uppercase tracking-wider text-[#6E6E73] dark:text-[#86868B]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 <span>Verified Deliverables & Business Impact</span>
               </div>
@@ -208,12 +209,12 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
                 {caseStudy.keyOutcomes.slice(0, 4).map((outcome, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 sm:p-4 rounded-xl bg-zinc-50 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5 flex items-start gap-3"
+                    className="p-3.5 sm:p-4 rounded-xl bg-[#F5F5F7] dark:bg-[#121214] border border-[#E5E7EB] dark:border-[#2C2C2E] flex items-start gap-3"
                   >
-                    <div className="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                     </div>
-                    <span className="text-xs sm:text-sm font-medium text-zinc-800 dark:text-zinc-200 leading-relaxed">
+                    <span className="text-xs sm:text-sm font-medium text-[#1D1D1F] dark:text-zinc-200 leading-relaxed">
                       {outcome}
                     </span>
                   </div>
@@ -224,8 +225,8 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
 
           {/* Strategic Insight if present */}
           {caseStudy.businessInsights && caseStudy.businessInsights.length > 0 && (
-            <div className="p-3.5 sm:p-4 rounded-xl bg-sky-50/60 dark:bg-sky-950/20 border border-sky-200/60 dark:border-sky-800/30 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 space-y-1">
-              <span className="font-mono font-bold text-sky-700 dark:text-sky-300 text-xs uppercase tracking-wider block">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-[#0071E3]/5 dark:bg-[#0071E3]/10 border border-[#0071E3]/20 text-xs sm:text-sm text-[#1D1D1F] dark:text-zinc-200 space-y-1">
+              <span className="font-mono font-bold text-[#0071E3] dark:text-[#2997FF] text-xs uppercase tracking-wider block">
                 Key Strategic Insight
               </span>
               <p className="leading-relaxed">
@@ -241,10 +242,10 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
         {/* ========================================================= */}
         {/* LAYER 3: STICKY BOTTOM ACTION FOOTER (Never Overlaps!) */}
         {/* ========================================================= */}
-        <div className="shrink-0 px-5 sm:px-7 py-3.5 sm:py-4 bg-zinc-50/95 dark:bg-[#101014]/95 backdrop-blur-xl border-t border-zinc-200/90 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 z-20">
+        <div className="shrink-0 px-5 sm:px-7 py-3.5 sm:py-4 bg-white/95 dark:bg-[#161617]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#2C2C2E] flex flex-col sm:flex-row items-center justify-between gap-3 z-20">
           
           {/* Left: Quick Jump Context */}
-          <div className="hidden sm:flex items-center gap-2 text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-400 font-medium">
+          <div className="hidden sm:flex items-center gap-2 text-xs sm:text-[13px] text-[#6E6E73] dark:text-[#86868B] font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
             <span>Interactive Simulator & Verified Repo Available</span>
           </div>
@@ -253,7 +254,7 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
           <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
             <button
               onClick={handleLiveDemoClick}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white transition-all shadow-md shadow-sky-500/20 active:scale-95 cursor-pointer min-h-[44px]"
+              className="apple-btn-primary flex-1 sm:flex-none flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full min-h-[44px] cursor-pointer"
             >
               <SlidersHorizontal className="w-4 h-4" />
               <span>Live Simulator</span>
@@ -263,7 +264,7 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 hover:opacity-90 transition-all shadow-sm active:scale-95 min-h-[44px]"
+              className="apple-btn-secondary flex-1 sm:flex-none flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full min-h-[44px] cursor-pointer"
             >
               <Github className="w-4 h-4" />
               <span>GitHub Code</span>
@@ -271,7 +272,7 @@ export default function ProjectCaseStudyModal({ project, onClose }) {
 
             <button
               onClick={onClose}
-              className="text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all cursor-pointer min-h-[44px]"
+              className="text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-full border border-[#E5E7EB] dark:border-[#2C2C2E] text-[#6E6E73] dark:text-[#86868B] hover:text-[#1D1D1F] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer min-h-[44px]"
             >
               Close
             </button>

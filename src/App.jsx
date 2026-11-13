@@ -18,9 +18,6 @@ export default function App() {
     const saved = localStorage.getItem('pk_portfolio_theme');
     return saved ? saved : 'light';
   });
-
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -30,41 +27,11 @@ export default function App() {
     localStorage.setItem('pk_portfolio_theme', theme);
   }, [theme]);
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-[#fbfbfd] dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 relative selection:bg-sky-500/20 selection:text-sky-600 dark:selection:text-sky-300 transition-colors duration-300">
-      
-      {/* Subtle Dynamic Ambient Cursor Glow */}
-      <div
-        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-40 dark:opacity-30"
-        style={{
-          background: theme === 'dark'
-            ? `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(56, 189, 248, 0.07), transparent 80%)`
-            : `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 113, 227, 0.05), transparent 80%)`,
-        }}
-      />
-
-      {/* Grid Pattern Texture */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-10 opacity-[0.025] dark:opacity-[0.015]"
-        style={{
-          backgroundImage: theme === 'dark' 
-            ? `radial-gradient(#ffffff 1px, transparent 1px)` 
-            : `radial-gradient(#000000 1px, transparent 1px)`,
-          backgroundSize: '24px 24px',
-        }}
-      />
-
+    <div className="min-h-screen bg-white dark:bg-black text-[#1D1D1F] dark:text-[#F5F5F7] relative selection:bg-[#0071E3]/15 selection:text-[#0071E3] dark:selection:bg-[#2997FF]/20 dark:selection:text-[#2997FF] transition-colors duration-250">
       <Navbar theme={theme} setTheme={setTheme} />
 
-      <main className="relative z-20">
+      <main className="relative z-10">
         <Hero />
         <About />
         <Projects />

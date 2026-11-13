@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend, LineChart, Line
@@ -358,31 +359,31 @@ export default function InteractiveDashboard() {
   ];
 
   return (
-    <section id="live-dashboard" className="pt-10 sm:pt-12 pb-16 sm:pb-20 scroll-mt-24 sm:scroll-mt-28 relative">
+    <section id="live-dashboard" className="pt-16 sm:pt-20 pb-16 sm:pb-20 scroll-mt-24 sm:scroll-mt-28 relative bg-[#F5F5F7] dark:bg-[#121214] border-y border-[#E5E7EB] dark:border-[#2C2C2E]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-semibold text-sky-600 dark:text-sky-400">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-xs font-semibold text-[#0071E3] dark:text-[#2997FF]">
             <SlidersHorizontal className="w-3.5 h-3.5" />
             <span>Interactive Data Simulation</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950 dark:text-white">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F] dark:text-white">
             Operational Analytics & ROI Simulator
           </h2>
-          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+          <p className="text-[17px] text-[#6E6E73] dark:text-[#86868B] leading-relaxed">
             Explore live mathematical models of automated ERP reconciliation, calculate capacity ROI across operating scenarios, and export executive audit summaries.
           </p>
         </div>
 
         {/* Sandbox Demarcation Alert Banner */}
-        <div className="mb-5 p-3.5 sm:p-4 rounded-2xl bg-sky-500/5 dark:bg-sky-500/[0.04] border border-sky-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-zinc-600 dark:text-zinc-400">
+        <div className="mb-5 p-4 rounded-2xl bg-white dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-[#6E6E73] dark:text-[#86868B]">
           <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse shrink-0" />
-            <span className="font-semibold text-zinc-900 dark:text-zinc-200">
+            <span className="w-2 h-2 rounded-full bg-[#0071E3] shrink-0" />
+            <span className="font-semibold text-[#1D1D1F] dark:text-[#F5F5F7]">
               Interactive Mathematical Sandbox
             </span>
-            <span className="hidden md:inline text-zinc-400">•</span>
+            <span className="hidden md:inline text-[#86868B]">•</span>
             <span className="hidden md:inline">
               Formulas derive dynamically from a unified calculation model. Pooja's actual enterprise achievements are documented in Experience.
             </span>
@@ -391,7 +392,7 @@ export default function InteractiveDashboard() {
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => setShowExecutiveModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-semibold text-xs hover:bg-sky-600 dark:hover:bg-sky-400 transition-colors shadow-sm cursor-pointer"
+              className="apple-btn-primary min-h-[38px] px-3.5 py-1.5 text-xs font-medium cursor-pointer"
               title="View full executive summary briefing"
             >
               <FileText className="w-3.5 h-3.5" />
@@ -400,19 +401,19 @@ export default function InteractiveDashboard() {
 
             <button
               onClick={exportToCSV}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/5 text-zinc-700 dark:text-zinc-300 font-medium transition-colors cursor-pointer"
+              className="apple-btn-secondary min-h-[38px] px-3.5 py-1.5 text-xs font-medium cursor-pointer"
               title="Download calculated scenario model as CSV"
             >
-              <Download className="w-3.5 h-3.5 text-sky-500" />
+              <Download className="w-3.5 h-3.5" />
               <span>Export CSV</span>
             </button>
 
             <button
               onClick={handleReset}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/5 text-zinc-700 dark:text-zinc-300 font-medium transition-colors cursor-pointer"
+              className="min-h-[38px] px-3.5 py-1.5 rounded-full border border-[#E5E7EB] dark:border-[#2C2C2E] hover:border-[#0071E3] dark:hover:border-[#2997FF] hover:bg-black/5 dark:hover:bg-white/5 text-[#1D1D1F] dark:text-[#F5F5F7] text-xs font-medium transition-colors cursor-pointer flex items-center gap-1.5"
               title="Reset sandbox inputs and scenario to baseline"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-sky-500" />
+              <RotateCcw className="w-3.5 h-3.5 text-[#0071E3] dark:text-[#2997FF]" />
               <span>Reset</span>
             </button>
           </div>
@@ -454,14 +455,23 @@ export default function InteractiveDashboard() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-xl transition-all shrink-0 whitespace-nowrap min-h-[36px] cursor-pointer ${
+                    className={`relative flex items-center gap-2 text-xs font-semibold px-3.5 py-1.5 rounded-xl transition-colors duration-200 shrink-0 whitespace-nowrap min-h-[36px] cursor-pointer select-none ${
                       isActive
-                        ? 'bg-sky-500 text-white font-semibold shadow-md shadow-sky-500/20'
-                        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
+                        ? 'text-white'
+                        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
                     }`}
                   >
-                    <Icon className="w-3.5 h-3.5" />
-                    <span>{tab.label}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeDashboardTab"
+                        className="absolute inset-0 bg-[#0071E3] rounded-xl shadow-md shadow-[#0071E3]/25"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-2">
+                      <Icon className="w-3.5 h-3.5" />
+                      <span>{tab.label}</span>
+                    </span>
                   </button>
                 );
               })}
@@ -568,19 +578,29 @@ export default function InteractiveDashboard() {
                       { key: 'baseline', label: 'Baseline (Mid-Enterprise)' },
                       { key: 'best', label: 'Best-Case (High Scale)' },
                       { key: 'worst', label: 'Conservative (Low Volume)' },
-                    ].map((s) => (
-                      <button
-                        key={s.key}
-                        onClick={() => applyScenario(s.key)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                          scenario === s.key
-                            ? 'bg-white dark:bg-zinc-800 text-sky-600 dark:text-sky-400 shadow-sm'
-                            : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
-                        }`}
-                      >
-                        {s.label}
-                      </button>
-                    ))}
+                    ].map((s) => {
+                      const isActive = scenario === s.key;
+                      return (
+                        <button
+                          key={s.key}
+                          onClick={() => applyScenario(s.key)}
+                          className={`relative px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200 cursor-pointer select-none ${
+                            isActive
+                              ? 'text-[#0071E3] dark:text-[#2997FF]'
+                              : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
+                          }`}
+                        >
+                          {isActive && (
+                            <motion.div
+                              layoutId="activeScenarioPill"
+                              className="absolute inset-0 bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-[#E5E7EB] dark:border-[#3A3A3C]"
+                              transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                            />
+                          )}
+                          <span className="relative z-10">{s.label}</span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 

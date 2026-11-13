@@ -228,22 +228,22 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="pt-16 sm:pt-20 pb-10 sm:pb-12 scroll-mt-24 sm:scroll-mt-28 relative">
+    <section id="projects" className="pt-16 sm:pt-20 pb-12 sm:pb-16 scroll-mt-24 sm:scroll-mt-28 relative bg-white dark:bg-black">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-semibold text-sky-600 dark:text-sky-400 mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E] text-xs font-semibold text-[#0071E3] dark:text-[#2997FF] mb-3">
               <Layers className="w-3.5 h-3.5" />
               <span>Interactive Engineering Case Studies</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F] dark:text-white">
               Featured Case Studies & Projects
             </h2>
           </div>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-md">
-            Click any project to explore the dedicated 12-section technical case study, data pipeline architecture, and verified business outcomes.
+          <p className="text-[15px] text-[#6E6E73] dark:text-[#86868B] max-w-md leading-relaxed">
+            Click any project to explore the dedicated technical case study, data pipeline architecture, and verified business outcomes.
           </p>
         </div>
 
@@ -253,17 +253,17 @@ export default function Projects() {
             <div
               key={project.id}
               onClick={() => openProjectModal(project)}
-              className="glass-panel glass-panel-hover rounded-3xl p-5 sm:p-7 flex flex-col justify-between relative overflow-hidden group shadow-sm bg-white dark:bg-[#121217]/60 cursor-pointer border-zinc-200/80 dark:border-white/10 hover:border-sky-500/40 dark:hover:border-sky-500/40 transition-all duration-300"
+              className="apple-card apple-card-hover rounded-2xl p-5 sm:p-7 flex flex-col justify-between relative cursor-pointer"
             >
               <div>
                 {/* Header Taxonomy Badges & GitHub Icon */}
                 <div className="flex items-center justify-between gap-2 mb-3.5">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/20">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#0071E3]/10 text-[#0071E3] dark:text-[#2997FF] border border-[#0071E3]/20">
                       {project.badge}
                     </span>
                     {project.category && (
-                      <span className="hidden sm:inline-block px-2.5 py-1 rounded-full text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5">
+                      <span className="hidden sm:inline-block px-2.5 py-1 rounded-full text-xs font-medium text-[#6E6E73] dark:text-[#86868B] bg-[#F5F5F7] dark:bg-[#161617] border border-[#E5E7EB] dark:border-[#2C2C2E]">
                         {project.category}
                       </span>
                     )}
@@ -274,7 +274,7 @@ export default function Projects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-full glass-panel hover:text-sky-600 dark:hover:text-sky-400 text-zinc-500 dark:text-zinc-400 transition-colors"
+                      className="p-2 rounded-full border border-[#E5E7EB] dark:border-[#2C2C2E] hover:border-[#0071E3] text-[#6E6E73] dark:text-[#86868B] hover:text-[#0071E3] dark:hover:text-[#2997FF] transition-colors"
                       title="View GitHub Repository"
                       aria-label="View GitHub Repository"
                     >
@@ -322,21 +322,21 @@ export default function Projects() {
                 </p>
 
                 {/* The Business Problem (STAR: Situation) */}
-                <div className="mb-3 p-3.5 rounded-2xl bg-amber-500/[0.06] border border-amber-500/20 text-xs sm:text-[13px] leading-relaxed text-zinc-700 dark:text-zinc-300">
-                  <div className="flex items-center gap-1.5 font-bold font-mono text-amber-700 dark:text-amber-400 text-xs uppercase tracking-wider mb-1">
+                <div className="mb-3 p-3.5 rounded-xl bg-amber-500/[0.05] dark:bg-amber-500/[0.04] border border-amber-500/20 text-xs sm:text-[13px] leading-relaxed text-[#1D1D1F] dark:text-[#F5F5F7]">
+                  <div className="flex items-center gap-1.5 font-semibold font-mono text-amber-700 dark:text-amber-400 text-xs uppercase tracking-wider mb-1">
                     <AlertTriangle className="w-3.5 h-3.5" />
                     <span>Business Problem</span>
                   </div>
-                  <p>{project.problem}</p>
+                  <p className="text-[#6E6E73] dark:text-[#86868B]">{project.problem}</p>
                 </div>
 
                 {/* The Solution (STAR: Action) */}
-                <div className="mb-4 p-3.5 rounded-2xl bg-sky-500/[0.06] border border-sky-500/20 text-xs sm:text-[13px] leading-relaxed text-zinc-700 dark:text-zinc-300">
-                  <div className="flex items-center gap-1.5 font-bold font-mono text-sky-700 dark:text-sky-400 text-xs uppercase tracking-wider mb-1">
+                <div className="mb-4 p-3.5 rounded-xl bg-[#0071E3]/[0.05] dark:bg-[#2997FF]/[0.08] border border-[#0071E3]/20 dark:border-[#2997FF]/20 text-xs sm:text-[13px] leading-relaxed text-[#1D1D1F] dark:text-[#F5F5F7]">
+                  <div className="flex items-center gap-1.5 font-semibold font-mono text-[#0071E3] dark:text-[#2997FF] text-xs uppercase tracking-wider mb-1">
                     <Zap className="w-3.5 h-3.5" />
                     <span>Engineered Solution</span>
                   </div>
-                  <p>{project.solution}</p>
+                  <p className="text-[#6E6E73] dark:text-[#86868B]">{project.solution}</p>
                 </div>
 
                 {/* Measurable Results KPI Row (STAR: Result) */}
@@ -344,12 +344,12 @@ export default function Projects() {
                   {project.measurableResults.map((result, idx) => (
                     <div
                       key={idx}
-                      className="p-2 sm:p-2.5 rounded-xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200 dark:border-white/5 text-center flex flex-col justify-center items-center"
+                      className="p-2 sm:p-2.5 rounded-xl bg-[#F5F5F7] dark:bg-[#121214] border border-[#E5E7EB] dark:border-[#2C2C2E] text-center flex flex-col justify-center items-center"
                     >
-                      <div className={`text-base sm:text-lg font-extrabold ${result.color}`}>
+                      <div className={`text-base sm:text-lg font-bold ${result.color}`}>
                         {result.metric}
                       </div>
-                      <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 leading-tight mt-1">
+                      <div className="text-xs font-medium text-[#6E6E73] dark:text-[#86868B] leading-tight mt-1">
                         {result.label}
                       </div>
                     </div>
@@ -359,23 +359,23 @@ export default function Projects() {
 
               <div>
                 {/* Tech Stack Pills */}
-                <div className="flex flex-wrap gap-1.5 pt-2 pb-4 border-t border-zinc-100 dark:border-white/5">
+                <div className="flex flex-wrap gap-1.5 pt-2 pb-4 border-t border-[#E5E7EB] dark:border-[#2C2C2E]">
                   {project.tools.map((tool) => (
                     <span
                       key={tool}
-                      className="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-zinc-100 dark:bg-white/[0.03] text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5"
+                      className="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-[#F5F5F7] dark:bg-[#121214] text-[#1D1D1F] dark:text-[#F5F5F7] border border-[#E5E7EB] dark:border-[#2C2C2E]"
                     >
                       {tool}
                     </span>
                   ))}
                 </div>
 
-                {/* 3 Interactive Action Buttons: Min 44px touch height */}
-                <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 pt-3 border-t border-zinc-100 dark:border-white/5">
+                {/* 3 Interactive Action Buttons: Apple Minimal CTAs (Min 44px touch height) */}
+                <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 pt-3 border-t border-[#E5E7EB] dark:border-[#2C2C2E]">
                   {/* Primary: View Case Study Modal */}
                   <button
                     onClick={() => openProjectModal(project)}
-                    className="flex-1 min-h-[44px] py-2.5 px-3.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-sky-600 dark:hover:bg-sky-400 transition-all shadow-sm active:scale-[0.98]"
+                    className="apple-btn-primary flex-1 min-h-[44px] py-2.5 px-4 text-xs sm:text-[13px] font-medium"
                   >
                     <BookOpen className="w-3.5 h-3.5" />
                     <span>Case Study</span>
@@ -385,9 +385,9 @@ export default function Projects() {
                   {/* Secondary: Live Demo */}
                   <button
                     onClick={(e) => handleLiveDemo(e, project)}
-                    className="min-h-[44px] py-2.5 px-3.5 rounded-xl glass-panel text-zinc-700 dark:text-zinc-300 font-semibold text-xs flex items-center justify-center gap-1.5 hover:border-sky-500/40 hover:text-sky-600 dark:hover:text-sky-400 transition-colors active:scale-[0.98]"
+                    className="apple-btn-secondary min-h-[44px] py-2.5 px-4 text-xs sm:text-[13px] font-medium"
                   >
-                    <SlidersHorizontal className="w-3.5 h-3.5 text-sky-500" />
+                    <SlidersHorizontal className="w-3.5 h-3.5" />
                     <span>Demo</span>
                   </button>
 
@@ -397,7 +397,7 @@ export default function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="min-h-[44px] py-2.5 px-3.5 rounded-xl glass-panel text-zinc-700 dark:text-zinc-300 font-semibold text-xs flex items-center justify-center gap-1 hover:border-sky-500/40 hover:text-sky-600 dark:hover:text-sky-400 transition-colors active:scale-[0.98]"
+                    className="min-h-[44px] py-2.5 px-3.5 rounded-full border border-[#E5E7EB] dark:border-[#2C2C2E] hover:border-[#0071E3] dark:hover:border-[#2997FF] text-[#1D1D1F] dark:text-[#F5F5F7] hover:text-[#0071E3] dark:hover:text-[#2997FF] font-medium text-xs sm:text-[13px] flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <Github className="w-3.5 h-3.5" />
                     <span>Code</span>
